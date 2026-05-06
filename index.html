@@ -341,18 +341,22 @@
                             </div>
                         </div>
                     </div>
-                    <form class="contact-form glass-card" id="contact-form">
+                    <form action="https://formsubmit.co/jasimalaa007@gmail.com" method="POST" class="contact-form glass-card" id="contact-form">
+                        <!-- Disable Captcha (optional, but good for UX) -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- Redirect after submission (optional, can just use default formsubmit thank you page) -->
                         <div class="form-group">
-                            <input type="text" id="name" required placeholder="Your Name">
+                            <input type="text" name="name" id="name" required placeholder="Your Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" required placeholder="Your Email">
+                            <input type="email" name="email" id="email" required placeholder="Your Email">
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" required placeholder="Subject">
+                            <input type="hidden" name="_subject" value="New submission from Portfolio!">
+                            <input type="text" name="subject" id="subject" required placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <textarea id="message" rows="5" required placeholder="Your Message"></textarea>
+                            <textarea name="message" id="message" rows="5" required placeholder="Your Message"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Send Message <i class="fa-solid fa-paper-plane"></i></button>
                     </form>
