@@ -284,7 +284,7 @@ export default function HeroSection() {
         {/* Compact Elegant Headline Allowing 3D Subject to be Fully Visible */}
         <div className="text-center mt-2 mb-auto py-3 pointer-events-none">
           <span className="text-[11px] sm:text-xs font-mono tracking-[0.25em] uppercase text-brand-cyan mb-1.5 block">
-            MOHAMMED JASIM • IT SUPPORT ENGINEER
+            MOHAMED JASIM • IT SUPPORT ENGINEER
           </span>
           <h1 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-400 drop-shadow-md">
             EXPLORE MY PORTFOLIO

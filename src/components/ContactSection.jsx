@@ -90,7 +90,7 @@ export default function ContactSection() {
               <div className="flex flex-col items-center justify-center text-center py-16">
                 <CheckCircle className="w-12 h-12 text-emerald-400 mb-4 animate-bounce" />
                 <h4 className="text-xl font-bold font-display uppercase text-white">MESSAGE SENT SUCCESSFULLY</h4>
-                <p className="text-xs font-mono text-zinc-400 mt-2">Thank you, Mohammed Jasim will get back to you shortly.</p>
+                <p className="text-xs font-mono text-zinc-400 mt-2">Thank you, Mohamed Jasim will get back to you shortly.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">

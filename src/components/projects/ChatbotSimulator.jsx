@@ -9,7 +9,7 @@ const QUICK_PROMPTS = [
 
 const BOT_KNOWLEDGE = {
   'What IT services do you offer?':
-    'Mohammed Jasim provides tier-1/2 hardware & network troubleshooting, SLA incident management, full-stack web applications, and security log auditing.',
+    'Mohamed Jasim provides tier-1/2 hardware & network troubleshooting, SLA incident management, full-stack web applications, and security log auditing.',
   'How do I check ticket SLA status?':
     'At Al Mariah Facility Management (SKMC Ajman), tickets are prioritized and logged with a proven 95%+ first-call resolution rate ensuring minimal downtime.',
   'Tell me about your cybersecurity skills.':
@@ -20,7 +20,7 @@ export default function ChatbotSimulator() {
   const [messages, setMessages] = useState([
     {
       sender: 'bot',
-      text: 'Hello! I am Mohammed Jasim’s automated AI Assistant powered by Dialogflow & Node.js. How can I help you today?',
+      text: 'Hello! I am Mohamed Jasim’s automated AI Assistant powered by Dialogflow & Node.js. How can I help you today?',
       time: 'Just now',
     },
   ]);
@@ -53,7 +53,7 @@ export default function ChatbotSimulator() {
       let botReply = BOT_KNOWLEDGE[query];
       if (!botReply) {
         if (query.toLowerCase().includes('contact') || query.toLowerCase().includes('email')) {
-          botReply = 'You can reach Mohammed Jasim at jasimala07@gmail.com or call +971 56 766 5827.';
+          botReply = 'You can reach Mohamed Jasim at jasimala07@gmail.com or call +971 56 766 5827.';
         } else if (query.toLowerCase().includes('project') || query.toLowerCase().includes('work')) {
           botReply = 'Jasim has developed AI Chatbots, full-stack E-Commerce stores (PHP/JS), and responsive Task Management platforms with 30%+ efficiency gains.';
         } else {

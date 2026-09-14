@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="font-display font-black text-white text-base">MJ<span className="text-brand-cyan">.</span></span>
-          <span>© 2026 Mohammed Jasim. All rights reserved.</span>
+          <span>© 2026 Mohamed Jasim. All rights reserved.</span>
         </div>
 
         <button
