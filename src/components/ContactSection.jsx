@@ -31,28 +31,8 @@ export default function ContactSection() {
         {/* Pill Action Links Row Matching Reference */}
         <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
           <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 text-xs font-mono tracking-widest uppercase font-bold rounded-full bg-white text-black hover:bg-zinc-200 transition-all inline-flex items-center gap-2"
-          >
-            LINKEDIN
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 text-xs font-mono tracking-widest uppercase font-bold rounded-full bg-white/10 text-white border border-white/20 hover:bg-white hover:text-black transition-all inline-flex items-center gap-2"
-          >
-            GITHUB
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-
-          <a
             href="mailto:jasimala07@gmail.com"
-            className="px-6 py-2.5 text-xs font-mono tracking-widest uppercase font-bold rounded-full bg-white/10 text-white border border-white/20 hover:bg-white hover:text-black transition-all inline-flex items-center gap-2"
+            className="px-8 py-3 text-xs font-mono tracking-widest uppercase font-bold rounded-full bg-white text-black hover:bg-zinc-200 transition-all inline-flex items-center gap-2 shadow-lg hover:shadow-white/20 active:scale-95"
           >
             EMAIL ME
             <ArrowUpRight className="w-3.5 h-3.5" />
