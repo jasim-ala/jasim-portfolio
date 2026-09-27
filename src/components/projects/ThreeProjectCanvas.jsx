@@ -43,7 +43,85 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
     let mainMesh, wireMesh, ringMesh1, ringMesh2, particlesMesh;
 
-    if (type === 'ai-chatbot') {
+    if (type === 'n8n-outreach-bot') {
+      // 0. n8n Outreach Bot: linked workflow nodes orbiting a central agent core
+      const coreGeo = new THREE.IcosahedronGeometry(0.62, 1);
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: 0x06b6d4,
+        roughness: 0.15,
+        metalness: 0.9,
+        transparent: true,
+        opacity: 0.9,
+      });
+      mainMesh = new THREE.Mesh(coreGeo, coreMat);
+      group.add(mainMesh);
+
+      // Four workflow nodes: trigger, AI agent, review, send
+      const nodeGeo = new THREE.BoxGeometry(0.42, 0.42, 0.42);
+      const nodeColors = [0x8b5cf6, 0x06b6d4, 0xf59e0b, 0x10b981];
+      const nodeCount = nodeColors.length;
+      const radius = 1.65;
+      const nodePositions = [];
+
+      for (let i = 0; i < nodeCount; i++) {
+        const angle = (i / nodeCount) * Math.PI * 2;
+        const pos = new THREE.Vector3(
+          Math.cos(angle) * radius,
+          Math.sin(angle) * radius * 0.55,
+          Math.sin(angle) * radius * 0.35
+        );
+        nodePositions.push(pos);
+
+        const nodeMat = new THREE.MeshStandardMaterial({
+          color: nodeColors[i],
+          roughness: 0.2,
+          metalness: 0.85,
+          transparent: true,
+          opacity: 0.92,
+        });
+        const node = new THREE.Mesh(nodeGeo, nodeMat);
+        node.position.copy(pos);
+        node.rotation.set(0.4, 0.6, 0);
+        group.add(node);
+      }
+
+      // Connectors drawn between consecutive nodes, like a workflow canvas
+      const lineMat = new THREE.LineBasicMaterial({
+        color: 0x06b6d4,
+        transparent: true,
+        opacity: 0.55,
+      });
+      const linePoints = [];
+      for (let i = 0; i < nodeCount; i++) {
+        linePoints.push(nodePositions[i], nodePositions[(i + 1) % nodeCount]);
+      }
+      const lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+      const connectors = new THREE.LineSegments(lineGeo, lineMat);
+      group.add(connectors);
+
+      // Wireframe shell around the agent core
+      const shellGeo = new THREE.IcosahedronGeometry(0.85, 1);
+      const shellMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.35,
+      });
+      wireMesh = new THREE.Mesh(shellGeo, shellMat);
+      group.add(wireMesh);
+
+      // Orbit ring holding the flow together
+      const flowRingGeo = new THREE.TorusGeometry(1.75, 0.02, 16, 90);
+      const flowRingMat = new THREE.MeshBasicMaterial({
+        color: 0x8b5cf6,
+        transparent: true,
+        opacity: 0.6,
+      });
+      ringMesh1 = new THREE.Mesh(flowRingGeo, flowRingMat);
+      ringMesh1.rotation.x = Math.PI / 2.6;
+      group.add(ringMesh1);
+
+    } else if (type === 'ai-chatbot') {
       // 1. AI Chatbot: 3D Holographic AI Neural Core with Floating Particle Halo
       const geo = new THREE.IcosahedronGeometry(1.2, 1);
       const mat = new THREE.MeshStandardMaterial({

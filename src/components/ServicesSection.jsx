@@ -8,24 +8,30 @@ export default function ServicesSection() {
     {
       id: 1,
       num: '1',
+      title: 'AI AUTOMATION & N8N WORKFLOWS',
+      desc: 'Designing, building and maintaining agentic workflows in n8n: chatbots, AI agent nodes calling the Claude API, human-in-the-loop approvals, webhook triggers, error handling and Gmail, Telegram and CRM integrations.',
+    },
+    {
+      id: 5,
+      num: '2',
       title: 'IT SUPPORT & HELPDESK OPERATIONS',
       desc: 'Delivering tier-1/2 hardware, software, and network support with a 95% first-call resolution rate, ticket logging, prioritization, and SLA compliance.',
     },
     {
       id: 2,
-      num: '2',
+      num: '3',
       title: 'FULL-STACK WEB & SOFTWARE ENGINEERING',
       desc: 'Developing responsive web platforms, secure auth systems, and full-stack solutions using Python, Java, PHP, JavaScript, Node.js, and MySQL.',
     },
     {
       id: 3,
-      num: '3',
+      num: '4',
       title: 'CYBERSECURITY & INCIDENT RESPONSE',
       desc: 'Investigating web activity logs, detecting potential security threats, mitigating compromise risks, and recommending rapid response actions.',
     },
     {
       id: 4,
-      num: '4',
+      num: '5',
       title: 'AI TOOLS & AGENTIC AI WORKFLOWS',
       desc: 'Leveraging GenAI tools, prompt engineering, agentic AI workflows, and API integrations for automated customer support and predictive analytics.',
     },

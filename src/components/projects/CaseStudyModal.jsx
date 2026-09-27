@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, CheckCircle2, Layers, Cpu, TrendingUp, ShieldCheck } from 'lucide-react';
+import { X, CheckCircle2, Layers, Cpu, TrendingUp, ShieldCheck, ExternalLink } from 'lucide-react';
 
 export default function CaseStudyModal({ project, onClose }) {
   useEffect(() => {
@@ -36,6 +36,19 @@ export default function CaseStudyModal({ project, onClose }) {
             {project.title}
           </h2>
         </div>
+
+        {/* Live / Workflow Link */}
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-cyan text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-white transition-all"
+          >
+            <ExternalLink className="w-4 h-4" />
+            {project.linkLabel || 'Open Link'}
+          </a>
+        )}
 
         {/* Impact Highlight */}
         <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">

@@ -284,7 +284,7 @@ export default function HeroSection() {
         {/* Compact Elegant Headline Allowing 3D Subject to be Fully Visible */}
         <div className="text-center mt-2 mb-auto py-3 pointer-events-none">
           <span className="text-[11px] sm:text-xs font-mono tracking-[0.25em] uppercase text-brand-cyan mb-1.5 block">
-            MOHAMED JASIM • IT SUPPORT ENGINEER
+            MOHAMED JASIM • AI SPECIALIST & AUTOMATION ENGINEER
           </span>
           <h1 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-400 drop-shadow-md">
             EXPLORE MY PORTFOLIO
@@ -297,7 +297,7 @@ export default function HeroSection() {
           {/* Left Block: EST Info & Down Circle Button */}
           <div className="md:col-span-4 flex flex-col items-start gap-4">
             <span className="text-xs font-mono tracking-widest uppercase text-zinc-400">
-              IT SUPPORT ENGINEER • AJMAN, UAE
+              AI SPECIALIST & AUTOMATION ENGINEER • AJMAN, UAE
             </span>
 
             <a
@@ -315,12 +315,14 @@ export default function HeroSection() {
           {/* Right Block: Bio Quote & Tech Tags from Updated CV */}
           <div className="md:col-span-4 flex flex-col items-end text-right gap-6">
             <p className="text-xs sm:text-sm text-zinc-300 font-mono tracking-wide max-w-xs uppercase leading-relaxed">
-              PROFICIENT IN JAVA, PYTHON, AGENTIC AI WORKFLOWS & HIGH-RELIABILITY ENTERPRISE IT SUPPORT
+              AI SPECIALIST BUILDING AGENTIC WORKFLOWS AND AUTOMATIONS IN N8N, BACKED BY JAVA, PYTHON AND ENTERPRISE IT SUPPORT
             </p>
 
             <div className="flex flex-wrap justify-end gap-2 text-[10px] font-mono tracking-widest uppercase text-zinc-400">
-              <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">IT SUPPORT</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">AI SPECIALIST</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">N8N AUTOMATION</span>
               <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">AGENTIC AI</span>
+              <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">IT SUPPORT</span>
               <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">CYBERSECURITY</span>
               <span className="px-3 py-1 rounded-full border border-white/15 bg-black/40">DATA ANALYTICS</span>
             </div>

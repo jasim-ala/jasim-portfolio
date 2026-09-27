@@ -15,9 +15,9 @@ export default function AboutSection() {
       skills: ['Python', 'Java', 'PHP', 'JavaScript', 'Node.js', 'HTML5', 'CSS3', 'SQL', 'MySQL'],
     },
     {
-      title: 'AI Tools & Vibe Coding',
+      title: 'AI Tools & Automation',
       icon: <Cpu className="w-4 h-4 text-brand-violet" />,
-      skills: ['GenAI Tools', 'Prompt Engineering', 'Agentic AI Workflows', 'Dialogflow', 'API Integrations'],
+      skills: ['n8n', 'Claude API', 'Claude Code', 'ChatGPT', 'Cursor', 'Gemini', 'ElevenLabs', 'Apache Airflow', 'Dialogflow', 'AI Agent Nodes', 'Prompt Engineering', 'Agentic AI Workflows', 'Telegram Bot API', 'Gmail API', 'Webhooks & API Integrations'],
     },
     {
       title: 'Operating Systems & Tools',
@@ -47,7 +47,7 @@ export default function AboutSection() {
           </div>
 
           <p className="text-xs sm:text-sm font-mono text-zinc-300 uppercase tracking-widest max-w-xl leading-relaxed">
-            HIGHLY MOTIVATED AND DEDICATED BSC COMPUTER SCIENCE GRADUATE WITH AN MSC IN CYBERSECURITY. PROFICIENT IN JAVA, PYTHON, AND MODERN AI-ASSISTED DEVELOPMENT WORKFLOWS.
+            AI SPECIALIST AND AUTOMATION ENGINEER WITH A BSC IN COMPUTER SCIENCE AND AN MSC IN CYBERSECURITY. I BUILD AGENTIC WORKFLOWS AND CHATBOTS IN N8N WITH THE CLAUDE API, BACKED BY JAVA, PYTHON AND MODERN AI-ASSISTED DEVELOPMENT.
           </p>
         </div>
 

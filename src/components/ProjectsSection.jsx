@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Box, Eye, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Box, Eye, ExternalLink, Sparkles } from 'lucide-react';
 import TiltCard from './projects/TiltCard';
 import ThreeProjectCanvas from './projects/ThreeProjectCanvas';
 import CaseStudyModal from './projects/CaseStudyModal';
@@ -13,6 +13,7 @@ export default function ProjectsSection() {
     'ai-chatbot': '3d',
     'ecommerce-platform': '3d',
     'task-management': '3d',
+    'n8n-outreach-bot': '3d',
   });
 
   const toggleViewMode = (projectId) => {
@@ -23,6 +24,26 @@ export default function ProjectsSection() {
   };
 
   const projects = [
+    {
+      id: 'n8n-outreach-bot',
+      category: 'AI & AUTOMATION',
+      type: 'N8N AGENTIC WORKFLOW',
+      title: 'Influencer Pitch Bot on n8n',
+      link: 'https://github.com/jasim-ala/influnecer-pitch-bot',
+      linkLabel: 'View Workflow',
+      bullets: [
+        'Built a 36-node Telegram bot on n8n Cloud that manages an influencer roster and drafts paid collaboration pitches to cafes and restaurants.',
+        'Classifies every incoming message into add, edit, lookup or pitch, then routes it through Switch nodes so one chat handles the whole workflow.',
+        'Stores the roster and each chat\'s pending state in n8n Data Tables, so free-text replies work reliably without a blocking wait node.',
+        'An AI Agent node backed by the Claude API writes the pitch from the matched influencer\'s handle, reach and package pricing.',
+        'Every draft returns to Telegram for review: reply send to email it, new for a fresh version, or type a change and the agent revises it.',
+      ],
+      architecture:
+        'A Telegram trigger checks Data Table state for a pending draft or intake before classifying the message. Code and Switch nodes route add, edit, lookup and pitch paths; the pitch path matches the influencer, calls an AI Agent node on the Claude API, and holds the draft as pending until a Telegram confirmation releases the Gmail send and marks the row sent.',
+      metric: 'HUMAN-IN-THE-LOOP',
+      tags: ['n8n', 'Telegram Bot API', 'Claude API', 'Gmail API', 'Data Tables', 'AI Agent'],
+      threeType: 'n8n-outreach-bot',
+    },
     {
       id: 'ai-chatbot',
       category: 'AI & AUTOMATION',
@@ -134,6 +155,20 @@ export default function ProjectsSection() {
                   </span>
 
                   <div className="flex items-center gap-2">
+                    {/* External Workflow / Live Link */}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1 text-[10px] font-mono uppercase font-bold rounded-full border border-brand-cyan/50 text-brand-cyan bg-brand-cyan/10 hover:bg-brand-cyan hover:text-black transition-all flex items-center gap-1.5"
+                        title={project.linkLabel || 'Open link'}
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span>{project.linkLabel || 'Open'}</span>
+                      </a>
+                    )}
+
                     {/* 3D vs Overview Switcher */}
                     <button
                       onClick={() => toggleViewMode(project.id)}
