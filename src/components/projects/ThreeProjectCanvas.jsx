@@ -376,11 +376,6 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
     <div className="relative w-full h-[300px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
       <div ref={mountRef} className="w-full h-full" />
       
-      {/* 3D Drag Indicator Badge */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 border border-white/15 backdrop-blur-md text-[10px] font-mono text-zinc-300 pointer-events-none flex items-center gap-1.5 whitespace-nowrap shadow-lg">
-        <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-ping" />
-        <span>Drag to rotate 3D object (360°)</span>
-      </div>
     </div>
   );
 }

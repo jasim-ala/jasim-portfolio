@@ -107,7 +107,7 @@ export default function ProjectsSection() {
         {/* Header Matching Reference */}
         <div className="text-center mb-12">
           <span className="text-xs font-mono uppercase tracking-widest text-brand-cyan mb-2 block">
-            INTERACTIVE 3D DESIGN • DRAG & ROTATE IN 360°
+            SELECTED WORK • AI, AUTOMATION & WEB
           </span>
           <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-500">
             FEATURED PROJECTS
