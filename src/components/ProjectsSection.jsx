@@ -10,6 +10,7 @@ export default function ProjectsSection() {
 
   // Active view mode for each project: '3d' (Three.js interactive 3D WebGL) or 'overview'
   const [viewModes, setViewModes] = useState({
+    'rag-docuchat': '3d',
     'ai-chatbot': '3d',
     'ecommerce-platform': '3d',
     'task-management': '3d',
@@ -24,6 +25,26 @@ export default function ProjectsSection() {
   };
 
   const projects = [
+    {
+      id: 'rag-docuchat',
+      category: 'AI & AUTOMATION',
+      type: 'RAG / LLM APP',
+      title: 'DocuChat: Chat with your PDFs',
+      link: 'https://docuchat-jasim.vercel.app',
+      linkLabel: 'Live Demo',
+      bullets: [
+        'Built a retrieval-augmented generation (RAG) app: upload PDFs and ask questions, with every answer citing the exact file and page it came from.',
+        'Extracts text page by page in the browser with pdf.js, so documents are never uploaded or stored on a server.',
+        'Splits pages into overlapping chunks and ranks them with a BM25 search index; only the top 6 chunks are sent to the model.',
+        'Gemini answers from the retrieved chunks only; the UI validates every [n] citation against the context the model was given and hides invented ones.',
+        'Production guardrails: per-IP rate limiting, input size caps, and automatic fallback across models when one is overloaded.',
+      ],
+      architecture:
+        'Next.js 16 app on Vercel. The browser parses PDFs with pdf.js, chunks pages (900 chars, 150 overlap) and runs BM25 retrieval locally. A streaming route handler sends the top chunks as numbered sources to the Gemini API and streams the answer back as NDJSON; the client renders validated inline citations with the quoted source text.',
+      metric: 'PAGE-LEVEL CITATIONS',
+      tags: ['RAG', 'Next.js', 'TypeScript', 'Gemini API', 'pdf.js', 'BM25', 'Vercel'],
+      threeType: 'rag-docuchat',
+    },
     {
       id: 'n8n-outreach-bot',
       category: 'AI & AUTOMATION',

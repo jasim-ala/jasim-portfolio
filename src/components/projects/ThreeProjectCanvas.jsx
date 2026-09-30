@@ -121,6 +121,61 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       ringMesh1.rotation.x = Math.PI / 2.6;
       group.add(ringMesh1);
 
+    } else if (type === 'rag-docuchat') {
+      // RAG DocuChat: a fanned stack of document pages with a retrieval scan ring
+      const pageGeo = new THREE.BoxGeometry(1.1, 1.45, 0.05);
+      const pageColors = [0x10b981, 0x06b6d4, 0x8b5cf6, 0x06b6d4, 0x10b981];
+      pageColors.forEach((color, i) => {
+        const pageMat = new THREE.MeshStandardMaterial({
+          color,
+          roughness: 0.2,
+          metalness: 0.85,
+          transparent: true,
+          opacity: 0.55 + i * 0.08,
+        });
+        const page = new THREE.Mesh(pageGeo, pageMat);
+        page.position.set((i - 2) * 0.12, (i - 2) * 0.06, (i - 2) * 0.22);
+        page.rotation.z = (i - 2) * 0.06;
+        group.add(page);
+        if (i === pageColors.length - 1) mainMesh = page;
+      });
+
+      // Text lines on the front page
+      const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 });
+      const linePoints = [];
+      for (let r = 0; r < 6; r++) {
+        const y = 0.5 - r * 0.2;
+        const width = r === 5 ? 0.35 : 0.75;
+        linePoints.push(new THREE.Vector3(-0.38, y, 0), new THREE.Vector3(-0.38 + width, y, 0));
+      }
+      const textLines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(linePoints), lineMat);
+      textLines.position.copy(mainMesh.position);
+      textLines.position.z += 0.03;
+      textLines.rotation.z = mainMesh.rotation.z;
+      group.add(textLines);
+
+      // Scan ring sweeping the stack (retrieval)
+      const scanGeo = new THREE.TorusGeometry(1.35, 0.025, 16, 90);
+      const scanMat = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.7 });
+      ringMesh1 = new THREE.Mesh(scanGeo, scanMat);
+      ringMesh1.rotation.x = Math.PI / 2.2;
+      group.add(ringMesh1);
+
+      // Retrieved chunks drifting out as particles
+      const count = 90;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        const r = 1.6 + Math.random() * 0.7;
+        const a = Math.random() * Math.PI * 2;
+        positions[i * 3] = Math.cos(a) * r;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 1.6;
+        positions[i * 3 + 2] = Math.sin(a) * r;
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particlesMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x06b6d4, size: 0.04 }));
+      group.add(particlesMesh);
+
     } else if (type === 'ai-chatbot') {
       // 1. AI Chatbot: 3D Holographic AI Neural Core with Floating Particle Halo
       const geo = new THREE.IcosahedronGeometry(1.2, 1);
