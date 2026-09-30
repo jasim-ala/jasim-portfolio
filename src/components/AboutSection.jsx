@@ -12,12 +12,12 @@ export default function AboutSection() {
     {
       title: 'Programming & Web',
       icon: <Terminal className="w-4 h-4 text-brand-cyan" />,
-      skills: ['Python', 'Java', 'PHP', 'JavaScript', 'Node.js', 'HTML5', 'CSS3', 'SQL', 'MySQL'],
+      skills: ['Python', 'Java', 'PHP', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'HTML5', 'CSS3', 'SQL', 'MySQL'],
     },
     {
       title: 'AI Tools & Automation',
       icon: <Cpu className="w-4 h-4 text-brand-violet" />,
-      skills: ['n8n', 'Claude API', 'Claude Code', 'ChatGPT', 'Cursor', 'Gemini', 'ElevenLabs', 'Apache Airflow', 'Dialogflow', 'AI Agent Nodes', 'Prompt Engineering', 'Agentic AI Workflows', 'Telegram Bot API', 'Gmail API', 'Webhooks & API Integrations'],
+      skills: ['n8n', 'Claude API', 'Gemini API', 'Claude Code', 'ChatGPT', 'Cursor', 'RAG', 'Structured Output', 'Function Calling', 'LLM Evals', 'ElevenLabs', 'Apache Airflow', 'Dialogflow', 'AI Agent Nodes', 'Prompt Engineering', 'Agentic AI Workflows', 'Telegram Bot API', 'Gmail API', 'Webhooks & API Integrations'],
     },
     {
       title: 'Operating Systems & Tools',

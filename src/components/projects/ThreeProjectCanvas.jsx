@@ -176,6 +176,103 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       particlesMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x06b6d4, size: 0.04 }));
       group.add(particlesMesh);
 
+    } else if (type === 'tripagent') {
+      // TripAgent: route of waypoint pins joined by a path, circled by the agent's loop ring
+      const stops = [
+        new THREE.Vector3(-1.3, -0.5, 0.2),
+        new THREE.Vector3(-0.5, 0.45, -0.3),
+        new THREE.Vector3(0.35, -0.2, 0.35),
+        new THREE.Vector3(1.2, 0.55, -0.1),
+      ];
+      const stopColors = [0x8b5cf6, 0x06b6d4, 0xf59e0b, 0x10b981];
+      stops.forEach((p, i) => {
+        const pinMat = new THREE.MeshStandardMaterial({ color: stopColors[i], roughness: 0.2, metalness: 0.85 });
+        const pin = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.42, 20), pinMat);
+        pin.position.set(p.x, p.y + 0.2, p.z);
+        pin.rotation.x = Math.PI;
+        group.add(pin);
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.17, 20, 20), pinMat);
+        head.position.set(p.x, p.y + 0.46, p.z);
+        group.add(head);
+        if (i === 1) mainMesh = head;
+      });
+      const curve = new THREE.CatmullRomCurve3(stops);
+      const pathGeo = new THREE.TubeGeometry(curve, 80, 0.025, 8, false);
+      const pathMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+      group.add(new THREE.Mesh(pathGeo, pathMat));
+
+      const loopGeo = new THREE.TorusGeometry(1.75, 0.02, 16, 90);
+      ringMesh1 = new THREE.Mesh(loopGeo, new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.6 }));
+      ringMesh1.rotation.x = Math.PI / 2.3;
+      group.add(ringMesh1);
+
+      const guardGeo = new THREE.TorusGeometry(2.0, 0.012, 16, 90);
+      ringMesh2 = new THREE.Mesh(guardGeo, new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.35 }));
+      ringMesh2.rotation.y = Math.PI / 2.5;
+      group.add(ringMesh2);
+
+    } else if (type === 'billscan') {
+      // BillScan: a receipt with printed line items, a scan beam and extracted table cells
+      const paperMat = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, roughness: 0.4, metalness: 0.2, transparent: true, opacity: 0.9 });
+      mainMesh = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.7, 0.04), paperMat);
+      mainMesh.position.x = -0.45;
+      mainMesh.rotation.z = 0.06;
+      group.add(mainMesh);
+
+      const inkMat = new THREE.LineBasicMaterial({ color: 0x334155 });
+      const inkPts = [];
+      for (let r = 0; r < 8; r++) {
+        const y = 0.62 - r * 0.16;
+        const w = r === 7 ? 0.3 : 0.62;
+        inkPts.push(new THREE.Vector3(-0.3, y, 0), new THREE.Vector3(-0.3 + w, y, 0));
+      }
+      const ink = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(inkPts), inkMat);
+      ink.position.set(mainMesh.position.x, 0, 0.03);
+      ink.rotation.z = mainMesh.rotation.z;
+      group.add(ink);
+
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.03, 0.05), new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.85 }));
+      beam.position.set(-0.45, 0.1, 0.06);
+      group.add(beam);
+
+      // Extracted table: a grid of cells floating beside the receipt
+      const cellColors = [0x8b5cf6, 0x06b6d4, 0x06b6d4, 0x10b981];
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 3; c++) {
+          const cell = new THREE.Mesh(
+            new THREE.BoxGeometry(0.3, 0.16, 0.05),
+            new THREE.MeshStandardMaterial({ color: cellColors[r], roughness: 0.2, metalness: 0.85, transparent: true, opacity: 0.8 }),
+          );
+          cell.position.set(0.55 + c * 0.34, 0.4 - r * 0.24, 0.2);
+          group.add(cell);
+        }
+      }
+      ringMesh1 = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.02, 16, 90), new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.5 }));
+      ringMesh1.rotation.x = Math.PI / 2.2;
+      group.add(ringMesh1);
+
+    } else if (type === 'evallab') {
+      // EvalLab: an answer sheet of pass/fail cubes inside a scoring ring
+      const passMat = new THREE.MeshStandardMaterial({ color: 0xa3e635, roughness: 0.2, metalness: 0.8 });
+      const failMat = new THREE.MeshStandardMaterial({ color: 0xfb7185, roughness: 0.2, metalness: 0.8 });
+      const fails = new Set([3, 11, 17]);
+      let n = 0;
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 5; c++) {
+          const cube = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.26, 0.26), fails.has(n) ? failMat : passMat);
+          cube.position.set(-0.72 + c * 0.36, 0.54 - r * 0.36, 0);
+          group.add(cube);
+          if (n === 7) mainMesh = cube;
+          n++;
+        }
+      }
+      const score = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.05, 16, 100, Math.PI * 2 * 0.94), new THREE.MeshBasicMaterial({ color: 0xa3e635, transparent: true, opacity: 0.75 }));
+      ringMesh1 = score;
+      group.add(score);
+      ringMesh2 = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.012, 16, 90), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 }));
+      ringMesh2.rotation.x = Math.PI / 2.4;
+      group.add(ringMesh2);
+
     } else if (type === 'ai-chatbot') {
       // 1. AI Chatbot: 3D Holographic AI Neural Core with Floating Particle Halo
       const geo = new THREE.IcosahedronGeometry(1.2, 1);

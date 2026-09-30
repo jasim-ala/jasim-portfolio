@@ -11,6 +11,9 @@ export default function ProjectsSection() {
   // Active view mode for each project: '3d' (Three.js interactive 3D WebGL) or 'overview'
   const [viewModes, setViewModes] = useState({
     'rag-docuchat': '3d',
+    'tripagent': '3d',
+    'billscan': '3d',
+    'evallab': '3d',
     'ai-chatbot': '3d',
     'ecommerce-platform': '3d',
     'task-management': '3d',
@@ -44,6 +47,63 @@ export default function ProjectsSection() {
       metric: 'PAGE-LEVEL CITATIONS',
       tags: ['RAG', 'Next.js', 'TypeScript', 'Gemini API', 'pdf.js', 'BM25', 'Vercel'],
       threeType: 'rag-docuchat',
+    },
+    {
+      id: 'tripagent',
+      category: 'AI & AUTOMATION',
+      type: 'AI AGENT / FUNCTION CALLING',
+      title: 'TripAgent: an AI agent that knows when to stop',
+      link: 'https://tripagent-jasim.vercel.app',
+      linkLabel: 'Live Demo',
+      bullets: [
+        'Built an autonomous UAE trip-planning agent: give it a goal and a budget, and it searches, schedules and costs a trip using 10 tools through Gemini function calling.',
+        'Tools enforce real-world rules: opening hours, closed days, seasonal venues, overlapping bookings and travel time between emirates. A mistake comes back as a tool error the agent must recover from.',
+        'Stop conditions are enforced in code, not left to the model: a 14-turn limit, a 95-second time limit, a loop detector, a finish validator that rejects "success" when over budget, and a hand-off to the user for real trade-offs.',
+        'A live trace, itinerary board and budget monitor stream every thought and tool call. Runs are resumable, and replays of real recorded runs keep the demo working when the free AI quota runs out.',
+      ],
+      architecture:
+        'Next.js route handler runs the agent loop on Gemini function calling and streams NDJSON events (thought, tool call, result, plan, stop) to the browser. The full model history is returned to the client so a run can resume statelessly after a question, a limit or a refinement request.',
+      metric: 'CODE-ENFORCED STOPS',
+      tags: ['AI Agents', 'Function Calling', 'Gemini API', 'Next.js', 'TypeScript', 'Streaming'],
+      threeType: 'tripagent',
+    },
+    {
+      id: 'billscan',
+      category: 'AI & AUTOMATION',
+      type: 'STRUCTURED OUTPUT',
+      title: 'BillScan: Bill Photo to Clean Table',
+      link: 'https://billscan-jasim.vercel.app',
+      linkLabel: 'Live Demo',
+      bullets: [
+        'Turns a photo of a receipt, bill or invoice into a validated, editable table with CSV and JSON export.',
+        'Gemini returns schema-constrained JSON (merchant, TRN/GSTIN, date, currency, line items, discount, service charge, tax, total), which is validated again with Zod on the server.',
+        'Arithmetic cross-checks recompute quantity × price, subtotal, VAT (inclusive and exclusive) and the grand total, and flag a receipt whose printed total is wrong.',
+        'Every cell is editable and the checks re-run instantly; photos are downsized in the browser before upload, with fallback across free AI models.',
+      ],
+      architecture:
+        'The browser downsizes the image to a JPEG and posts it to a Next.js route that calls Gemini with a JSON schema at temperature 0. The response is Zod-validated; a shared checker module recomputes the maths on the server output and again on every edit in the UI.',
+      metric: 'MATH-VERIFIED OUTPUT',
+      tags: ['Structured Output', 'Gemini API', 'Zod', 'Next.js', 'TypeScript', 'Vercel'],
+      threeType: 'billscan',
+    },
+    {
+      id: 'evallab',
+      category: 'AI & AUTOMATION',
+      type: 'LLM EVALUATION',
+      title: 'EvalLab: an exam for my AI apps',
+      link: 'https://evallab-jasim.vercel.app',
+      linkLabel: 'Live Scorecard',
+      bullets: [
+        'Built an evaluation suite and public scorecard for DocuChat, BillScan and TripAgent: 57 test cases in 4 suites, 129 of 137 checks passing (94%).',
+        'Deterministic graders (ground-truth fields, fact patterns, citation pages, tool outcomes) instead of an LLM judge; live suites call the deployed apps end to end.',
+        'Found real issues: keyword retrieval misses paraphrased questions, and BillScan raised a false VAT alarm when VAT is charged on the service charge, which I then fixed.',
+        'Run history, per-case drill-down and quota-aware re-runs that only re-grade failed cases.',
+      ],
+      architecture:
+        'A Node.js (TypeScript) runner executes offline suites against the production modules and live suites against the deployed APIs, writes a JSON report and history, and the Next.js scorecard renders it statically, so the site needs no API key.',
+      metric: '94% · 129/137 CHECKS',
+      tags: ['LLM Evals', 'Test Design', 'TypeScript', 'Node.js', 'Next.js'],
+      threeType: 'evallab',
     },
     {
       id: 'n8n-outreach-bot',
