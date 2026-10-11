@@ -1,6 +1,19 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
+// Light-theme palette shared by every project model
+const PALETTE = {
+  accent: 0x7c5cff,
+  sky: 0x9fb6ff,
+  mint: 0x7fe0d0,
+  amber: 0xffc27a,
+  pass: 0x8ee6a8,
+  fail: 0xfca5b8,
+  paper: 0xf6f4ff,
+  ink: 0x3a3e52,
+  line: 0xa9a6c8,
+};
+
 export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
   const mountRef = useRef(null);
 
@@ -9,7 +22,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
     if (!container) return;
 
     const width = container.clientWidth || 300;
-    const height = container.clientHeight || 240;
+    const height = container.clientHeight || 200;
 
     // --- Scene, Camera & Renderer ---
     const scene = new THREE.Scene();
@@ -25,17 +38,16 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     container.appendChild(renderer.domElement);
 
-    // --- Lighting ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
+    // --- Lighting: soft, bright studio light for the white theme ---
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xdfe3ea, 1.1));
 
-    const pointLight1 = new THREE.PointLight(0x06b6d4, 3, 10);
-    pointLight1.position.set(3, 3, 3);
-    scene.add(pointLight1);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    keyLight.position.set(3, 4, 5);
+    scene.add(keyLight);
 
-    const pointLight2 = new THREE.PointLight(0x8b5cf6, 3, 10);
-    pointLight2.position.set(-3, -3, 2);
-    scene.add(pointLight2);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    fillLight.position.set(-3, -2, 2);
+    scene.add(fillLight);
 
     // --- Procedural 3D Object Creation based on Project Type ---
     const group = new THREE.Group();
@@ -47,9 +59,9 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // 0. n8n Outreach Bot: linked workflow nodes orbiting a central agent core
       const coreGeo = new THREE.IcosahedronGeometry(0.62, 1);
       const coreMat = new THREE.MeshStandardMaterial({
-        color: 0x06b6d4,
-        roughness: 0.15,
-        metalness: 0.9,
+        color: PALETTE.accent,
+        roughness: 0.35,
+        metalness: 0.1,
         transparent: true,
         opacity: 0.9,
       });
@@ -58,7 +70,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Four workflow nodes: trigger, AI agent, review, send
       const nodeGeo = new THREE.BoxGeometry(0.42, 0.42, 0.42);
-      const nodeColors = [0x8b5cf6, 0x06b6d4, 0xf59e0b, 0x10b981];
+      const nodeColors = [PALETTE.sky, PALETTE.accent, PALETTE.amber, PALETTE.mint];
       const nodeCount = nodeColors.length;
       const radius = 1.65;
       const nodePositions = [];
@@ -74,8 +86,8 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
         const nodeMat = new THREE.MeshStandardMaterial({
           color: nodeColors[i],
-          roughness: 0.2,
-          metalness: 0.85,
+          roughness: 0.35,
+          metalness: 0.1,
           transparent: true,
           opacity: 0.92,
         });
@@ -87,7 +99,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Connectors drawn between consecutive nodes, like a workflow canvas
       const lineMat = new THREE.LineBasicMaterial({
-        color: 0x06b6d4,
+        color: PALETTE.accent,
         transparent: true,
         opacity: 0.55,
       });
@@ -102,7 +114,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // Wireframe shell around the agent core
       const shellGeo = new THREE.IcosahedronGeometry(0.85, 1);
       const shellMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        color: PALETTE.line,
         wireframe: true,
         transparent: true,
         opacity: 0.35,
@@ -113,7 +125,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // Orbit ring holding the flow together
       const flowRingGeo = new THREE.TorusGeometry(1.75, 0.02, 16, 90);
       const flowRingMat = new THREE.MeshBasicMaterial({
-        color: 0x8b5cf6,
+        color: PALETTE.sky,
         transparent: true,
         opacity: 0.6,
       });
@@ -124,12 +136,12 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
     } else if (type === 'rag-docuchat') {
       // RAG DocuChat: a fanned stack of document pages with a retrieval scan ring
       const pageGeo = new THREE.BoxGeometry(1.1, 1.45, 0.05);
-      const pageColors = [0x10b981, 0x06b6d4, 0x8b5cf6, 0x06b6d4, 0x10b981];
+      const pageColors = [PALETTE.mint, PALETTE.accent, PALETTE.sky, PALETTE.accent, PALETTE.mint];
       pageColors.forEach((color, i) => {
         const pageMat = new THREE.MeshStandardMaterial({
           color,
-          roughness: 0.2,
-          metalness: 0.85,
+          roughness: 0.35,
+          metalness: 0.1,
           transparent: true,
           opacity: 0.55 + i * 0.08,
         });
@@ -141,7 +153,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       });
 
       // Text lines on the front page
-      const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 });
+      const lineMat = new THREE.LineBasicMaterial({ color: PALETTE.line, transparent: true, opacity: 0.7 });
       const linePoints = [];
       for (let r = 0; r < 6; r++) {
         const y = 0.5 - r * 0.2;
@@ -156,7 +168,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Scan ring sweeping the stack (retrieval)
       const scanGeo = new THREE.TorusGeometry(1.35, 0.025, 16, 90);
-      const scanMat = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.7 });
+      const scanMat = new THREE.MeshBasicMaterial({ color: PALETTE.mint, transparent: true, opacity: 0.7 });
       ringMesh1 = new THREE.Mesh(scanGeo, scanMat);
       ringMesh1.rotation.x = Math.PI / 2.2;
       group.add(ringMesh1);
@@ -173,7 +185,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       }
       const pGeo = new THREE.BufferGeometry();
       pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      particlesMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x06b6d4, size: 0.04 }));
+      particlesMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: PALETTE.accent, size: 0.04 }));
       group.add(particlesMesh);
 
     } else if (type === 'tripagent') {
@@ -184,9 +196,9 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
         new THREE.Vector3(0.35, -0.2, 0.35),
         new THREE.Vector3(1.2, 0.55, -0.1),
       ];
-      const stopColors = [0x8b5cf6, 0x06b6d4, 0xf59e0b, 0x10b981];
+      const stopColors = [PALETTE.sky, PALETTE.accent, PALETTE.amber, PALETTE.mint];
       stops.forEach((p, i) => {
-        const pinMat = new THREE.MeshStandardMaterial({ color: stopColors[i], roughness: 0.2, metalness: 0.85 });
+        const pinMat = new THREE.MeshStandardMaterial({ color: stopColors[i], roughness: 0.35, metalness: 0.1 });
         const pin = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.42, 20), pinMat);
         pin.position.set(p.x, p.y + 0.2, p.z);
         pin.rotation.x = Math.PI;
@@ -198,28 +210,28 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       });
       const curve = new THREE.CatmullRomCurve3(stops);
       const pathGeo = new THREE.TubeGeometry(curve, 80, 0.025, 8, false);
-      const pathMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+      const pathMat = new THREE.MeshBasicMaterial({ color: PALETTE.line, transparent: true, opacity: 0.6 });
       group.add(new THREE.Mesh(pathGeo, pathMat));
 
       const loopGeo = new THREE.TorusGeometry(1.75, 0.02, 16, 90);
-      ringMesh1 = new THREE.Mesh(loopGeo, new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.6 }));
+      ringMesh1 = new THREE.Mesh(loopGeo, new THREE.MeshBasicMaterial({ color: PALETTE.sky, transparent: true, opacity: 0.6 }));
       ringMesh1.rotation.x = Math.PI / 2.3;
       group.add(ringMesh1);
 
       const guardGeo = new THREE.TorusGeometry(2.0, 0.012, 16, 90);
-      ringMesh2 = new THREE.Mesh(guardGeo, new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.35 }));
+      ringMesh2 = new THREE.Mesh(guardGeo, new THREE.MeshBasicMaterial({ color: PALETTE.accent, transparent: true, opacity: 0.35 }));
       ringMesh2.rotation.y = Math.PI / 2.5;
       group.add(ringMesh2);
 
     } else if (type === 'billscan') {
       // BillScan: a receipt with printed line items, a scan beam and extracted table cells
-      const paperMat = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, roughness: 0.4, metalness: 0.2, transparent: true, opacity: 0.9 });
+      const paperMat = new THREE.MeshStandardMaterial({ color: PALETTE.paper, roughness: 0.4, metalness: 0.1, transparent: true, opacity: 0.9 });
       mainMesh = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.7, 0.04), paperMat);
       mainMesh.position.x = -0.45;
       mainMesh.rotation.z = 0.06;
       group.add(mainMesh);
 
-      const inkMat = new THREE.LineBasicMaterial({ color: 0x334155 });
+      const inkMat = new THREE.LineBasicMaterial({ color: PALETTE.ink });
       const inkPts = [];
       for (let r = 0; r < 8; r++) {
         const y = 0.62 - r * 0.16;
@@ -231,30 +243,30 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       ink.rotation.z = mainMesh.rotation.z;
       group.add(ink);
 
-      const beam = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.03, 0.05), new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.85 }));
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.03, 0.05), new THREE.MeshBasicMaterial({ color: PALETTE.amber, transparent: true, opacity: 0.85 }));
       beam.position.set(-0.45, 0.1, 0.06);
       group.add(beam);
 
       // Extracted table: a grid of cells floating beside the receipt
-      const cellColors = [0x8b5cf6, 0x06b6d4, 0x06b6d4, 0x10b981];
+      const cellColors = [PALETTE.sky, PALETTE.accent, PALETTE.accent, PALETTE.mint];
       for (let r = 0; r < 4; r++) {
         for (let c = 0; c < 3; c++) {
           const cell = new THREE.Mesh(
             new THREE.BoxGeometry(0.3, 0.16, 0.05),
-            new THREE.MeshStandardMaterial({ color: cellColors[r], roughness: 0.2, metalness: 0.85, transparent: true, opacity: 0.8 }),
+            new THREE.MeshStandardMaterial({ color: cellColors[r], roughness: 0.35, metalness: 0.1, transparent: true, opacity: 0.8 }),
           );
           cell.position.set(0.55 + c * 0.34, 0.4 - r * 0.24, 0.2);
           group.add(cell);
         }
       }
-      ringMesh1 = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.02, 16, 90), new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.5 }));
+      ringMesh1 = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.02, 16, 90), new THREE.MeshBasicMaterial({ color: PALETTE.amber, transparent: true, opacity: 0.5 }));
       ringMesh1.rotation.x = Math.PI / 2.2;
       group.add(ringMesh1);
 
     } else if (type === 'evallab') {
       // EvalLab: an answer sheet of pass/fail cubes inside a scoring ring
-      const passMat = new THREE.MeshStandardMaterial({ color: 0xa3e635, roughness: 0.2, metalness: 0.8 });
-      const failMat = new THREE.MeshStandardMaterial({ color: 0xfb7185, roughness: 0.2, metalness: 0.8 });
+      const passMat = new THREE.MeshStandardMaterial({ color: PALETTE.pass, roughness: 0.35, metalness: 0.1 });
+      const failMat = new THREE.MeshStandardMaterial({ color: PALETTE.fail, roughness: 0.35, metalness: 0.1 });
       const fails = new Set([3, 11, 17]);
       let n = 0;
       for (let r = 0; r < 4; r++) {
@@ -266,10 +278,10 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
           n++;
         }
       }
-      const score = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.05, 16, 100, Math.PI * 2 * 0.94), new THREE.MeshBasicMaterial({ color: 0xa3e635, transparent: true, opacity: 0.75 }));
+      const score = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.05, 16, 100, Math.PI * 2 * 0.94), new THREE.MeshBasicMaterial({ color: PALETTE.pass, transparent: true, opacity: 0.75 }));
       ringMesh1 = score;
       group.add(score);
-      ringMesh2 = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.012, 16, 90), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 }));
+      ringMesh2 = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.012, 16, 90), new THREE.MeshBasicMaterial({ color: PALETTE.line, transparent: true, opacity: 0.35 }));
       ringMesh2.rotation.x = Math.PI / 2.4;
       group.add(ringMesh2);
 
@@ -277,9 +289,9 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // 1. AI Chatbot: 3D Holographic AI Neural Core with Floating Particle Halo
       const geo = new THREE.IcosahedronGeometry(1.2, 1);
       const mat = new THREE.MeshStandardMaterial({
-        color: 0x06b6d4,
-        roughness: 0.2,
-        metalness: 0.8,
+        color: PALETTE.accent,
+        roughness: 0.35,
+        metalness: 0.1,
         wireframe: false,
         transparent: true,
         opacity: 0.85,
@@ -289,7 +301,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Outer Wireframe Shell
       const wireMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        color: PALETTE.line,
         wireframe: true,
         transparent: true,
         opacity: 0.35,
@@ -300,13 +312,13 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Orbiting Particle Halo Rings
       const ringGeo1 = new THREE.TorusGeometry(1.7, 0.02, 16, 100);
-      const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.7 });
+      const ringMat1 = new THREE.MeshBasicMaterial({ color: PALETTE.accent, transparent: true, opacity: 0.7 });
       ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
       ringMesh1.rotation.x = Math.PI / 3;
       group.add(ringMesh1);
 
       const ringGeo2 = new THREE.TorusGeometry(2.0, 0.015, 16, 100);
-      const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.5 });
+      const ringMat2 = new THREE.MeshBasicMaterial({ color: PALETTE.sky, transparent: true, opacity: 0.5 });
       ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
       ringMesh2.rotation.y = Math.PI / 4;
       group.add(ringMesh2);
@@ -326,7 +338,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
       const particleMat = new THREE.PointsMaterial({
         size: 0.04,
-        color: 0x06b6d4,
+        color: PALETTE.accent,
         transparent: true,
         opacity: 0.8,
       });
@@ -337,9 +349,9 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // 2. E-Commerce Platform: 3D Cyber Vault Cube with Floating Golden/Cyan Rings
       const boxGeo = new THREE.BoxGeometry(1.4, 1.4, 1.4);
       const boxMat = new THREE.MeshStandardMaterial({
-        color: 0x8b5cf6,
-        roughness: 0.15,
-        metalness: 0.9,
+        color: PALETTE.sky,
+        roughness: 0.35,
+        metalness: 0.1,
         transparent: true,
         opacity: 0.85,
       });
@@ -348,7 +360,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       const boxWireGeo = new THREE.BoxGeometry(1.5, 1.5, 1.5);
       const boxWireMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        color: PALETTE.line,
         wireframe: true,
         transparent: true,
         opacity: 0.4,
@@ -358,7 +370,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Concentric Rings
       const ringGeo = new THREE.TorusGeometry(1.8, 0.03, 16, 80);
-      const ringMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.3, metalness: 0.8 });
+      const ringMat = new THREE.MeshStandardMaterial({ color: PALETTE.mint, roughness: 0.3, metalness: 0.1 });
       ringMesh1 = new THREE.Mesh(ringGeo, ringMat);
       group.add(ringMesh1);
 
@@ -366,9 +378,9 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       // 3. Task Management: 3D Crystalline Matrix Octahedron with Glowing Vertices
       const octGeo = new THREE.OctahedronGeometry(1.4, 0);
       const octMat = new THREE.MeshStandardMaterial({
-        color: 0x10b981,
-        roughness: 0.1,
-        metalness: 0.9,
+        color: PALETTE.mint,
+        roughness: 0.35,
+        metalness: 0.1,
         transparent: true,
         opacity: 0.85,
       });
@@ -376,7 +388,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
       group.add(mainMesh);
 
       const octWireMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        color: PALETTE.line,
         wireframe: true,
         transparent: true,
         opacity: 0.45,
@@ -387,7 +399,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
 
       // Floating Lattice Rings
       const ringGeo = new THREE.TorusGeometry(1.8, 0.02, 16, 80);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.6 });
+      const ringMat = new THREE.MeshBasicMaterial({ color: PALETTE.accent, transparent: true, opacity: 0.6 });
       ringMesh1 = new THREE.Mesh(ringGeo, ringMat);
       ringMesh1.rotation.x = Math.PI / 2;
       group.add(ringMesh1);
@@ -525,7 +537,7 @@ export default function ThreeProjectCanvas({ type = 'ai-chatbot' }) {
   }, [type]);
 
   return (
-    <div className="relative w-full h-[300px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
+    <div className="relative flex h-full min-h-[200px] w-full cursor-grab select-none items-center justify-center active:cursor-grabbing">
       <div ref={mountRef} className="w-full h-full" />
       
     </div>

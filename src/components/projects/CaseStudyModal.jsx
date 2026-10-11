@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, CheckCircle2, Layers, Cpu, TrendingUp, ShieldCheck, ExternalLink } from 'lucide-react';
+import { X, Layers, Cpu, TrendingUp, ArrowUpRight } from 'lucide-react';
 
 export default function CaseStudyModal({ project, onClose }) {
   useEffect(() => {
@@ -13,96 +13,80 @@ export default function CaseStudyModal({ project, onClose }) {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-fade-in font-sans">
+    <div
+      className="animate-fade-in fixed inset-0 z-[60] flex items-center justify-center bg-ink/20 p-4 backdrop-blur-sm sm:p-6"
+      onClick={onClose}
+    >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-dark-900/95 border border-white/20 rounded-3xl p-6 sm:p-10 shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
+        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[28px] bg-white p-6 shadow-float sm:p-10"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-all"
-          aria-label="Close Case Study"
+          className="absolute right-5 top-5 rounded-full bg-surface-subtle p-2 text-ink-muted transition-colors duration-300 hover:bg-surface-muted hover:text-ink"
+          aria-label="Close case study"
         >
-          <X className="w-5 h-5" />
+          <X className="h-5 w-5" />
         </button>
 
-        {/* Modal Header */}
-        <div className="mb-8">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-brand-cyan bg-white/5 px-3 py-1 rounded-full border border-white/10 mb-3 inline-block">
-            {project.type}
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+        <div className="mb-6 pr-10">
+          <span className="eyebrow">{project.type}</span>
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             {project.title}
           </h2>
         </div>
 
-        {/* Live / Workflow Link */}
         {project.link && (
           <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-cyan text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-white transition-all"
+            className="mb-8 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-accent transition-colors duration-300 hover:bg-accent-hover"
           >
-            <ExternalLink className="w-4 h-4" />
-            {project.linkLabel || 'Open Link'}
+            {project.linkLabel || 'Open link'}
+            <ArrowUpRight className="h-4 w-4" />
           </a>
         )}
 
-        {/* Impact Highlight */}
-        <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <TrendingUp className="w-5 h-5 text-emerald-400" />
-            <span className="text-xs font-mono uppercase text-zinc-300">Measured Outcome</span>
+        <div className="panel mb-8 flex items-center justify-between gap-4 p-4">
+          <div className="flex items-center gap-3 text-sm text-ink-soft">
+            <TrendingUp className="h-4 w-4 text-accent" />
+            Measured outcome
           </div>
-          <span className="text-sm font-mono font-bold text-emerald-400">
-            {project.metric}
-          </span>
+          <span className="font-mono text-sm font-medium text-accent">{project.metric}</span>
         </div>
 
-        {/* Technical Architecture Overview */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-3">
-            <Layers className="w-4 h-4 text-brand-cyan" />
-            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
-              Architecture & System Design
-            </h3>
+          <div className="mb-3 flex items-center gap-2">
+            <Layers className="h-4 w-4 text-ink-muted" />
+            <h3 className="text-sm font-semibold text-ink">Architecture &amp; system design</h3>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed bg-black/40 p-4 rounded-2xl border border-white/10">
-            {project.architecture}
-          </p>
+          <p className="panel p-5 text-sm leading-relaxed text-ink-soft">{project.architecture}</p>
         </div>
 
-        {/* Key Engineering Highlights */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-3">
-            <Cpu className="w-4 h-4 text-brand-violet" />
-            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
-              Engineering Highlights
-            </h3>
+          <div className="mb-3 flex items-center gap-2">
+            <Cpu className="h-4 w-4 text-ink-muted" />
+            <h3 className="text-sm font-semibold text-ink">Engineering highlights</h3>
           </div>
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {project.bullets.map((bullet, i) => (
-              <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed">
-                <CheckCircle2 className="w-4 h-4 text-brand-cyan shrink-0 mt-0.5" />
+              <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 <span>{bullet}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Tech Stack Pills */}
-        <div className="pt-6 border-t border-white/10">
-          <span className="text-[10px] font-mono uppercase text-zinc-500 block mb-3">
-            Technologies & APIs Used
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag, tIdx) => (
-              <span
-                key={tIdx}
-                className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 border border-white/20 text-zinc-200"
-              >
+        <div className="border-t border-surface-line pt-6">
+          <span className="eyebrow">Technologies &amp; APIs</span>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag">
                 {tag}
               </span>
             ))}

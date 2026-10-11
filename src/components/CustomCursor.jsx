@@ -90,22 +90,20 @@ export default function CustomCursor() {
       {/* Outer Fluid Kinetic Ring */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 -ml-4 -mt-4 rounded-full border transition-[width,height,background-color,border-color] duration-200 ease-out will-change-transform ${
+        className={`fixed top-0 left-0 rounded-full border transition-[width,height,margin,background-color,border-color] duration-300 ease-out-expo will-change-transform ${
           isClicked
-            ? 'w-6 h-6 -ml-3 -mt-3 bg-brand-cyan/25 border-brand-cyan scale-90'
+            ? 'w-6 h-6 -ml-3 -mt-3 bg-accent/15 border-accent'
             : isHovered
-            ? 'w-12 h-12 -ml-6 -mt-6 bg-brand-cyan/15 border-brand-cyan/80 backdrop-blur-[1px] shadow-[0_0_20px_rgba(6,182,212,0.4)]'
-            : 'w-8 h-8 border-white/40 bg-white/5 backdrop-blur-[0.5px]'
+            ? 'w-12 h-12 -ml-6 -mt-6 bg-accent/10 border-accent/50'
+            : 'w-8 h-8 -ml-4 -mt-4 border-ink/20 bg-transparent'
         }`}
       />
 
-      {/* Center Precision Target Dot */}
+      {/* Center dot (transform is set per mousemove, so it is not transitioned) */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 -ml-1 -mt-1 rounded-full transition-[width,height,background-color,transform] duration-150 ease-out will-change-transform ${
-          isHovered
-            ? 'w-2 h-2 -ml-1 -mt-1 bg-brand-cyan shadow-[0_0_8px_#06b6d4]'
-            : 'w-2 h-2 bg-white'
+        className={`fixed top-0 left-0 -ml-1 -mt-1 h-2 w-2 rounded-full transition-colors duration-300 will-change-transform ${
+          isHovered ? 'bg-accent' : 'bg-ink'
         }`}
       />
     </div>

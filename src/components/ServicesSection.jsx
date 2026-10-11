@@ -1,113 +1,63 @@
-import React, { useState } from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Workflow, Headset, Code2, ShieldCheck, BrainCircuit } from 'lucide-react';
+import GlassObject from './GlassObject';
+
+// Pastel icon tiles, one tint per service (as in the design)
+const SERVICES = [
+  {
+    icon: Workflow,
+    tint: 'bg-[#fff1e2] text-[#f08a24]',
+    title: 'AI Automation & n8n Workflows',
+    desc: 'Designing, building and maintaining agentic workflows in n8n: chatbots, AI agent nodes calling the Claude API, human-in-the-loop approvals, webhook triggers, error handling and Gmail, Telegram and CRM integrations.',
+  },
+  {
+    icon: Headset,
+    tint: 'bg-[#f0e8ff] text-[#8b5cf6]',
+    title: 'IT Support & Helpdesk Operations',
+    desc: 'Delivering tier-1/2 hardware, software and network support with a 95% first-call resolution rate, ticket logging, prioritization and SLA compliance.',
+  },
+  {
+    icon: Code2,
+    tint: 'bg-[#e6edff] text-[#4f7cff]',
+    title: 'Full-Stack Web & Software Engineering',
+    desc: 'Developing responsive web platforms, secure auth systems and full-stack solutions using Python, Java, PHP, JavaScript, Node.js and MySQL.',
+  },
+  {
+    icon: ShieldCheck,
+    tint: 'bg-[#dff5f2] text-[#13a89a]',
+    title: 'Cybersecurity & Incident Response',
+    desc: 'Investigating web activity logs, detecting potential security threats, mitigating compromise risks and recommending rapid response actions.',
+  },
+  {
+    icon: BrainCircuit,
+    tint: 'bg-[#fde7f1] text-[#e0468e]',
+    title: 'AI Tools & Agentic AI Workflows',
+    desc: 'Leveraging GenAI tools, prompt engineering, agentic AI workflows and API integrations for automated customer support and predictive analytics.',
+  },
+];
 
 export default function ServicesSection() {
-  const [activeService, setActiveService] = useState(2); // Service 3 active by default matching reference
-
-  const services = [
-    {
-      id: 1,
-      num: '1',
-      title: 'AI AUTOMATION & N8N WORKFLOWS',
-      desc: 'Designing, building and maintaining agentic workflows in n8n: chatbots, AI agent nodes calling the Claude API, human-in-the-loop approvals, webhook triggers, error handling and Gmail, Telegram and CRM integrations.',
-    },
-    {
-      id: 5,
-      num: '2',
-      title: 'IT SUPPORT & HELPDESK OPERATIONS',
-      desc: 'Delivering tier-1/2 hardware, software, and network support with a 95% first-call resolution rate, ticket logging, prioritization, and SLA compliance.',
-    },
-    {
-      id: 2,
-      num: '3',
-      title: 'FULL-STACK WEB & SOFTWARE ENGINEERING',
-      desc: 'Developing responsive web platforms, secure auth systems, and full-stack solutions using Python, Java, PHP, JavaScript, Node.js, and MySQL.',
-    },
-    {
-      id: 3,
-      num: '4',
-      title: 'CYBERSECURITY & INCIDENT RESPONSE',
-      desc: 'Investigating web activity logs, detecting potential security threats, mitigating compromise risks, and recommending rapid response actions.',
-    },
-    {
-      id: 4,
-      num: '5',
-      title: 'AI TOOLS & AGENTIC AI WORKFLOWS',
-      desc: 'Leveraging GenAI tools, prompt engineering, agentic AI workflows, and API integrations for automated customer support and predictive analytics.',
-    },
-  ];
-
   return (
-    <section id="services" className="py-28 bg-black text-white relative border-t border-white/10">
-      <div className="container mx-auto px-6">
-        
-        {/* Section Header Matching Reference Design */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-500 mb-4">
-            THE SERVICES WE PROVIDE
-          </h2>
-          <p className="text-xs sm:text-sm font-mono tracking-widest text-zinc-400 uppercase leading-relaxed">
-            CREATING VISUALLY APPEALING AND FUNCTIONAL IT SOLUTIONS TAILORED TO CLIENT NEEDS PROVIDING A CONSISTENT EXPERIENCE ACROSS PLATFORMS.
-          </p>
-        </div>
+    <section id="services" className="glass relative px-6 py-10 sm:px-12 sm:py-12">
+      {/* Glass bubble resting on the panel's right edge */}
+      <GlassObject shape="bubble" className="absolute -right-14 -top-10 hidden h-44 w-44 lg:block" />
 
-        {/* Numbered Pill Rows Matching Reference Design */}
-        <div className="max-w-3xl mx-auto space-y-4">
-          {services.map((service, index) => {
-            const isActive = activeService === index;
+      <span className="eyebrow">What I do</span>
+      <h2 className="section-title mt-3">Services I Offer</h2>
 
-            return (
-              <div
-                key={service.id}
-                onClick={() => setActiveService(index)}
-                className={`cursor-pointer group flex items-center justify-between p-4 sm:p-5 rounded-full border transition-all duration-300 ${
-                  isActive
-                    ? 'bg-white text-black border-white shadow-xl scale-[1.02]'
-                    : 'bg-white/5 border-white/10 hover:border-white/30 text-white'
-                }`}
-              >
-                {/* Number Badge */}
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold border ${
-                    isActive
-                      ? 'bg-black text-white border-black'
-                      : 'bg-white/10 text-white border-white/20'
-                  }`}
-                >
-                  {service.num}
-                </div>
-
-                {/* Title */}
-                <h3
-                  className={`font-display text-sm sm:text-base font-bold uppercase tracking-widest text-center px-4 ${
-                    isActive ? 'text-black' : 'text-white'
-                  }`}
-                >
-                  {service.title}
-                </h3>
-
-                {/* Arrow Action Button */}
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${
-                    isActive
-                      ? 'bg-black text-white border-black'
-                      : 'bg-white/10 text-white border-white/20 group-hover:bg-white group-hover:text-black'
-                  }`}
-                >
-                  {isActive ? <ArrowRight className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Selected Service Detail Box */}
-        <div className="max-w-3xl mx-auto mt-8 p-6 rounded-3xl bg-white/5 border border-white/10 text-center">
-          <p className="text-xs sm:text-sm font-mono text-zinc-300 uppercase tracking-wide leading-relaxed">
-            {services[activeService].desc}
-          </p>
-        </div>
-
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {SERVICES.map(({ icon: Icon, tint, title, desc }) => (
+          <article key={title} className="glass-card lift flex flex-col p-5">
+            <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${tint}`}>
+              <Icon className="h-5 w-5" />
+            </span>
+            <h3 className="mt-5 text-[15px] font-semibold leading-snug text-ink">{title}</h3>
+            <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-muted">{desc}</p>
+            <a href="#contact" className="icon-btn mt-5 self-end" aria-label={`Talk to me about ${title}`}>
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </article>
+        ))}
       </div>
     </section>
   );

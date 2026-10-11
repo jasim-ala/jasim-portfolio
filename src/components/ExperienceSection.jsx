@@ -1,5 +1,5 @@
-import React from 'react';
-import { Calendar, Building2, CheckCircle2 } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ChevronLeft, ChevronRight, Building2, Quote } from 'lucide-react';
 
 export default function ExperienceSection() {
   const experiences = [
@@ -15,7 +15,7 @@ export default function ExperienceSection() {
         'Generated and analyzed help desk performance reports, identifying trends to optimize support efficiency and response times.',
       ],
       current: true,
-      badge: 'ACTIVE ROLE',
+      badge: 'Current role',
     },
     {
       period: 'October 2025',
@@ -29,7 +29,7 @@ export default function ExperienceSection() {
         'Investigated suspicious user activity to determine possible data compromise or unauthorized access.',
       ],
       current: false,
-      badge: 'CYBERSECURITY',
+      badge: 'Cybersecurity',
     },
     {
       period: 'October 2025',
@@ -43,7 +43,7 @@ export default function ExperienceSection() {
         'Designed an AI-driven collections strategy leveraging agentic AI and automation, ensuring compliance with ethical AI standards and regulatory frameworks.',
       ],
       current: false,
-      badge: 'DATA & AI',
+      badge: 'Data & AI',
     },
     {
       period: 'March 2024',
@@ -58,69 +58,78 @@ export default function ExperienceSection() {
         'Collaborated with team members to deliver efficient IT support services and enhance overall operational reliability.',
       ],
       current: false,
-      badge: 'IT SUPPORT',
+      badge: 'IT support',
     },
   ];
 
+  const trackRef = useRef(null);
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector('article');
+    const step = card ? card.offsetWidth + 20 : track.clientWidth;
+    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+
   return (
-    <section id="experience" className="py-28 bg-black text-white relative border-t border-white/10">
-      <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2 block">
-            WORK HISTORY & SIMULATIONS
-          </span>
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-500">
-            PROFESSIONAL EXPERIENCE
-          </h2>
+    <section id="experience" className="glass px-6 py-10 sm:px-12 sm:py-12">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span className="eyebrow">Experience</span>
+          <h2 className="section-title mt-3">Where I&apos;ve Worked</h2>
         </div>
+        <div className="flex gap-2">
+          <button onClick={() => scrollByCard(-1)} className="icon-btn h-9 w-9" aria-label="Previous">
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button onClick={() => scrollByCard(1)} className="icon-btn h-9 w-9" aria-label="Next">
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
 
-        {/* Timeline List */}
-        <div className="max-w-4xl mx-auto space-y-8">
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-10 hover:border-white/30 transition-all duration-300"
-            >
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                  <Calendar className="w-3.5 h-3.5 text-brand-cyan" />
-                  <span>{exp.period}</span>
-                </div>
-
-                <span className={`px-3 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-full border ${
-                  exp.current
-                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                    : 'bg-white/5 text-zinc-400 border-white/10'
-                }`}>
-                  {exp.badge}
-                </span>
-              </div>
-
-              <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mb-2">
-                {exp.role}
-              </h3>
-
-              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-6 pb-4 border-b border-white/10">
-                <Building2 className="w-3.5 h-3.5 text-zinc-500" />
-                <span>{exp.company}</span>
-                <span>•</span>
-                <span>{exp.location}</span>
-              </div>
-
-              <ul className="space-y-3">
-                {exp.highlights.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed">
-                    <CheckCircle2 className="w-4 h-4 text-brand-cyan shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+      <div
+        ref={trackRef}
+        className="no-scrollbar -mx-2 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-2 pb-4 pt-1"
+      >
+        {experiences.map((exp) => (
+          <article
+            key={`${exp.role}-${exp.period}`}
+            className="glass-card flex w-[88%] shrink-0 snap-start flex-col p-6 sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
+                  exp.current ? 'bg-accent-soft text-accent' : 'border border-white bg-white/80 text-ink-muted'
+                }`}
+              >
+                {exp.current && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
+                {exp.badge}
+              </span>
+              <Quote className="h-5 w-5 shrink-0 fill-accent-ring text-accent-ring" />
             </div>
-          ))}
-        </div>
 
+            <ul className="mt-5 flex-1 space-y-2.5">
+              {exp.highlights.map((item) => (
+                <li key={item} className="text-[13px] leading-relaxed text-ink-soft">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex items-center gap-3 border-t border-white/80 pt-5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white bg-white text-ink-soft shadow-card">
+                <Building2 className="h-4 w-4" />
+              </span>
+              <div className="min-w-0">
+                <div className="text-sm font-semibold leading-snug text-ink">{exp.role}</div>
+                <div className="text-xs text-ink-muted">
+                  {exp.company} · {exp.location} · {exp.period}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 
-const SYSTEM_PROMPT = `You are the personal AI assistant for Jasim's portfolio. Answer visitor questions about his skills, experience, and projects professionally and concisely. Use these facts:
-- Education: Final-year university student studying cybersecurity and information technology.
-- Web Development: Freelance full-stack developer (React, Next.js, Node.js, Vercel, Firebase, NeonDB, Clerk) specializing in dark, high-contrast, minimalist aesthetics and 3D web design using tools like Antigravity and Google Flow.
-- Professional Experience: Works as a sales and visual merchandising executive in the UAE. Also experienced as an audio-visual technician for international summits, specializing in simultaneous interpretation systems.
-- Languages: Fluent in English and Malayalam, with beginner proficiency in Arabic.
+const SYSTEM_PROMPT = `You are the personal AI assistant for Mohamed Jasim's portfolio. Answer visitor questions about his skills, experience, and projects professionally and concisely. Use these facts:
+- Education: BSc in Computer Science (2021 – 2024) and MSc in Cybersecurity, University of West London.
+- Current role: IT Support Engineer, Facility Management Helpdesk at Al Mariah Facility Management (SKMC, Ajman), April 2025 – present; 95% first-call resolution, SLA-based ticket handling. Previously IT support at Al Taqwa Electric Wire Trading (2023 – 2025).
+- AI work: Gemini and Claude APIs, RAG, function calling, structured output, LLM evals, n8n workflows. Live projects: DocuChat (RAG chat with PDFs), TripAgent (AI agent with code-enforced stop rules), BillScan (bill photo to verified table), EvalLab (eval scorecard, 129/137 checks passing).
+- Stack: TypeScript, React, Next.js, Node.js, Python, Java, PHP, MySQL.
+- Location: Ajman, UAE. Contact: jasimala07@gmail.com.
+- Languages: English and Malayalam, some Arabic.
 If a visitor asks a question outside of this scope, politely pivot back to his professional qualifications.`;
 
 export async function POST(req) {
