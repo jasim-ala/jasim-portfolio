@@ -12,6 +12,26 @@ export default function ProjectsSection() {
 
   const projects = [
     {
+      id: 'pipeline-crm',
+      kind: 'Full-stack AI CRM',
+      category: 'AI & AUTOMATION',
+      type: 'FULL-STACK / HUMAN-IN-THE-LOOP AI',
+      title: 'Pipeline: an AI-assisted B2B CRM',
+      link: 'https://pipeline-jasim.vercel.app',
+      linkLabel: 'Live Demo',
+      bullets: [
+        'Built a full-stack CRM for UAE B2B sales: a drag-and-drop deal pipeline, a live dashboard and client records, with a one-click demo login so anyone can try it without signing up.',
+        'Every new lead gets a personalised cold email drafted by Claude in the background, returned as schema-validated JSON and queued for review.',
+        'One shared, idempotent approval path for the web app and a Telegram bot: approving logs the activity and moves the deal from Lead to Contacted, and a double tap or a race between the two changes nothing.',
+        'Production details: Clerk auth with per-user data isolation, row-locked Postgres transactions, optimistic Kanban moves that roll back on failure, keyboard-accessible drag and drop, light and dark themes, and unit tests for the metrics and approval logic.',
+      ],
+      architecture:
+        'Next.js 16 App Router on Vercel with Server Components and zod-validated Server Actions. Clerk handles auth and the demo sign-in token; Drizzle talks to Neon Postgres (HTTP for reads, a WebSocket transaction for moves and approvals). Creating a lead queues a Claude call with after(); the draft lands as pending and is approved in the app or from Telegram through the same decideDraft() function. A daily Vercel Cron job reseeds the demo.',
+      metric: 'WEB + TELEGRAM APPROVALS',
+      tags: ['Next.js', 'TypeScript', 'Claude API', 'Neon Postgres', 'Drizzle', 'Clerk', 'Telegram Bot API', 'dnd-kit'],
+      image: '/images/work/pipeline.jpg',
+    },
+    {
       id: 'rag-docuchat',
       kind: 'RAG web app',
       category: 'AI & AUTOMATION',

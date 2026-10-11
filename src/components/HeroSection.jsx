@@ -85,7 +85,7 @@ export default function HeroSection() {
 
           {/* Floating cards */}
           <div className="glass-card animate-float absolute -right-3 top-[6%] bg-white/95 px-4 py-3 text-center sm:-right-10">
-            <div className="text-3xl font-semibold tracking-tight text-ink">4</div>
+            <div className="text-3xl font-semibold tracking-tight text-ink">5</div>
             <div className="mt-0.5 text-[11px] leading-tight text-ink-muted">
               Live AI
               <br />

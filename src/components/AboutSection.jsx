@@ -3,7 +3,7 @@ import { ArrowUpRight, Headset, Rocket, GraduationCap } from 'lucide-react';
 
 const STATS = [
   { icon: Headset, number: '95%', label: 'First-call resolution' },
-  { icon: Rocket, number: '4', label: 'AI apps live' },
+  { icon: Rocket, number: '5', label: 'AI apps live' },
   { icon: GraduationCap, number: 'MSc', label: 'Cybersecurity' },
 ];
 

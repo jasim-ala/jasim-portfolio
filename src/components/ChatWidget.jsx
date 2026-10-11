@@ -17,7 +17,7 @@ const KNOWLEDGE = {
   experience:
     'Jasim is an IT Support Engineer on the Facility Management Helpdesk at Al Mariah Facility Management (SKMC, Ajman) since April 2025, with a 95% first-call resolution rate and SLA-based ticket handling. Before that he did IT support at Al Taqwa Electric Wire Trading (2023 – 2025).',
   projects:
-    'His live AI projects are DocuChat (RAG chat with PDFs and page citations), TripAgent (a function-calling agent with code-enforced stop rules), BillScan (bill photos to verified tables) and EvalLab (an eval scorecard for those apps, 129 of 137 checks passing). He also built an n8n Telegram bot that drafts influencer pitches with human review. See the Projects section for live links.',
+    'His live AI projects are Pipeline (a full-stack B2B CRM where Claude drafts outreach emails that are approved in the app or on Telegram), DocuChat (RAG chat with PDFs and page citations), TripAgent (a function-calling agent with code-enforced stop rules), BillScan (bill photos to verified tables) and EvalLab (an eval scorecard for those apps, 129 of 137 checks passing). He also built an n8n Telegram bot that drafts influencer pitches with human review. See the Projects section for live links.',
   languages: 'Jasim speaks English and Malayalam, and some Arabic.',
   contact:
     'You can email Jasim at jasimala07@gmail.com or use the contact form at the bottom of this page. He is based in Ajman, UAE.',
@@ -25,7 +25,7 @@ const KNOWLEDGE = {
 
 const RULES = [
   { keys: ['education', 'study', 'degree', 'university', 'college', 'msc', 'bsc'], answer: KNOWLEDGE.education },
-  { keys: ['project', 'built', 'portfolio', 'docuchat', 'tripagent', 'billscan', 'evallab', 'rag', 'agent', 'n8n'], answer: KNOWLEDGE.projects },
+  { keys: ['project', 'built', 'portfolio', 'pipeline', 'crm', 'docuchat', 'tripagent', 'billscan', 'evallab', 'rag', 'agent', 'n8n'], answer: KNOWLEDGE.projects },
   { keys: ['skill', 'stack', 'tech', 'develop', 'code', 'react', 'next', 'python', 'gemini', 'claude'], answer: KNOWLEDGE.stack },
   { keys: ['experience', 'work', 'job', 'role', 'uae', 'helpdesk', 'support', 'current'], answer: KNOWLEDGE.experience },
   { keys: ['language', 'speak', 'english', 'arabic', 'malayalam'], answer: KNOWLEDGE.languages },
