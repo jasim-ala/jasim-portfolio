@@ -16,13 +16,20 @@ export default function App() {
   return (
     <div className="relative min-h-screen font-sans text-ink">
       {/* Soft lavender light and white streaks behind the glass panels */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-page">
-        <div className="absolute -left-40 -top-40 h-[640px] w-[640px] rounded-full bg-[#e3dcff] opacity-70 blur-[120px]" />
-        <div className="absolute -right-40 top-1/4 h-[560px] w-[560px] rounded-full bg-[#dfe8ff] opacity-80 blur-[120px]" />
-        <div className="absolute bottom-0 left-1/3 h-[520px] w-[520px] rounded-full bg-[#efe6ff] opacity-70 blur-[120px]" />
-        <div className="absolute -right-24 top-16 h-[140%] w-40 rotate-[28deg] bg-gradient-to-b from-white/0 via-white/80 to-white/0 blur-2xl" />
-        <div className="absolute left-[12%] top-0 h-[140%] w-24 -rotate-[22deg] bg-gradient-to-b from-white/0 via-white/60 to-white/0 blur-2xl" />
-      </div>
+      {/* Gradients instead of blurred layers: same look, no per-frame blur cost on phones */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 bg-page"
+        style={{
+          backgroundImage: [
+            'radial-gradient(640px 640px at 0% 0%, rgba(227, 220, 255, 0.75), transparent 70%)',
+            'radial-gradient(560px 560px at 100% 35%, rgba(223, 232, 255, 0.85), transparent 70%)',
+            'radial-gradient(520px 520px at 45% 100%, rgba(239, 230, 255, 0.75), transparent 70%)',
+            'linear-gradient(118deg, transparent 62%, rgba(255, 255, 255, 0.6) 70%, transparent 78%)',
+            'linear-gradient(68deg, transparent 8%, rgba(255, 255, 255, 0.45) 14%, transparent 20%)',
+          ].join(', '),
+        }}
+      />
 
       <CustomCursor />
 

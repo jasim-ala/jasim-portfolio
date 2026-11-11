@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
-import ThreeProjectCanvas from './projects/ThreeProjectCanvas';
+// three.js loads only when a card without a screenshot is shown ("View All")
+const ThreeProjectCanvas = lazy(() => import('./projects/ThreeProjectCanvas'));
 import CaseStudyModal from './projects/CaseStudyModal';
 
 // Cards shown before "View All Projects" is pressed
@@ -236,7 +237,9 @@ export default function ProjectsSection() {
                   />
                 </a>
               ) : (
-                <ThreeProjectCanvas type={project.threeType} />
+                <Suspense fallback={null}>
+                  <ThreeProjectCanvas type={project.threeType} />
+                </Suspense>
               )}
               {project.link && (
                 <a

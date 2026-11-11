@@ -104,6 +104,21 @@
   display: none;
 }
 
+/*
+ * Phones: dozens of stacked backdrop blurs make iOS Safari scroll slowly and
+ * glitch. The panels sit on a soft flat gradient, so the blur adds almost nothing
+ * there; only the sticky nav keeps it.
+ */
+@media (max-width: 1023px) {
+  main .glass,
+  main .glass-card,
+  main .btn-glass,
+  footer.glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
