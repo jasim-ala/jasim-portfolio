@@ -1,10 +1,10 @@
 import React from 'react';
-import { ArrowUpRight, Headset, Rocket, GraduationCap } from 'lucide-react';
+import { ArrowUpRight, Headset, Rocket, Briefcase } from 'lucide-react';
 
 const STATS = [
+  { icon: Briefcase, number: '3+ yrs', label: 'UAE IT experience' },
   { icon: Headset, number: '95%', label: 'First-call resolution' },
   { icon: Rocket, number: '5', label: 'AI apps live' },
-  { icon: GraduationCap, number: 'MSc', label: 'Cybersecurity' },
 ];
 
 export default function AboutSection() {
@@ -34,13 +34,15 @@ export default function AboutSection() {
 
         <div>
           <p className="max-w-md text-[15px] leading-relaxed text-ink-muted">
-            AI and automation engineer with a BSc in Computer Science and an MSc in Cybersecurity. I
-            build agentic workflows, RAG apps and chatbots with the Gemini and Claude APIs and n8n,
-            backed by hands-on enterprise IT support.
+            Hands-on IT Specialist with over three years of UAE experience across IT support, system
+            administration, networking and AI-powered automation. I use AI tools every day to research
+            problems, write scripts and build automations end to end, and I test every output before
+            go-live. I build n8n workflows, API integrations, RAG apps and chatbots that remove
+            repetitive manual work.
           </p>
           <p className="mt-4 max-w-md text-[13px] leading-relaxed text-ink-muted">
-            University of West London · MSc Cybersecurity &amp; BSc Computer Science (2021 – 2024),
-            with a focus on incident response, cryptography and network defense.
+            MSc Cybersecurity, Paris American University (2025 – 2026) · BSc Computer Science,
+            University of West London (2021 – 2024).
           </p>
           <a href="#experience" className="btn-glass mt-7 px-5 py-2.5 text-[13px]">
             More About Me

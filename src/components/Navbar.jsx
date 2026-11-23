@@ -42,7 +42,7 @@ export default function Navbar() {
           </span>
           <span className="leading-tight">
             <span className="block text-sm font-semibold text-ink">Mohamed Jasim</span>
-            <span className="block text-[11px] text-ink-muted">AI &amp; Automation Engineer</span>
+            <span className="block text-[11px] text-ink-muted">IT Specialist · AI &amp; Automation</span>
           </span>
         </a>
 

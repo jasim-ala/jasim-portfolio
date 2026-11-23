@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Phone, Mail, MapPin, ChevronDown } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, ChevronDown, Linkedin } from 'lucide-react';
 import GlassObject from './GlassObject';
 
 const EMAIL = 'jasimala07@gmail.com';
@@ -7,10 +7,11 @@ const EMAIL = 'jasimala07@gmail.com';
 const DETAILS = [
   { icon: Mail, value: EMAIL, href: `mailto:${EMAIL}` },
   { icon: Phone, value: '+971 56 766 5827', href: 'tel:+971567665827' },
-  { icon: MapPin, value: 'Ajman, United Arab Emirates' },
+  { icon: Linkedin, value: 'LinkedIn profile', href: 'https://www.linkedin.com/in/mohamed-jasim-247493271' },
+  { icon: MapPin, value: 'Dubai, United Arab Emirates' },
 ];
 
-const TOPICS = ['AI automation / n8n workflow', 'AI app (RAG, agents)', 'IT support role', 'Cybersecurity role', 'Something else'];
+const TOPICS = ['IT specialist role', 'AI automation / n8n workflow', 'AI app (RAG, agents)', 'IT support role', 'Cybersecurity role', 'Something else'];
 
 const fieldClass =
   'w-full rounded-xl border border-white/90 bg-white/70 px-4 py-3 text-[13px] text-ink shadow-card placeholder:text-ink-faint transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-accent-ring';
@@ -51,7 +52,11 @@ export default function ContactSection() {
               return (
                 <li key={value}>
                   {href ? (
-                    <a href={href} className="group flex items-center gap-3">
+                    <a
+                      href={href}
+                      {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
+                      className="group flex items-center gap-3"
+                    >
                       {inner}
                     </a>
                   ) : (

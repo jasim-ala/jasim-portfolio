@@ -8,7 +8,7 @@ export default function Footer() {
         <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white bg-white text-[11px] font-bold text-ink shadow-card">
           MJ
         </span>
-        <span>© 2026 Mohamed Jasim · Ajman, UAE</span>
+        <span>© 2026 Mohamed Jasim · Dubai, UAE</span>
       </div>
 
       <button

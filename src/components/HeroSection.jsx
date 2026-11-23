@@ -36,7 +36,9 @@ export default function HeroSection() {
           <span className="eyebrow">Hello, I&apos;m</span>
           <h1 className="mt-4 text-5xl font-semibold tracking-tight text-ink sm:text-6xl">Mohamed Jasim</h1>
           <p className="mt-2 bg-gradient-to-r from-[#b18cff] via-[#8b74ff] to-[#6f8dff] bg-clip-text text-3xl font-medium tracking-tight text-transparent sm:text-4xl">
-            AI &amp; Automation Engineer
+            IT Specialist
+            <br />
+            AI &amp; Automation
           </p>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink-muted">
             I build practical AI: RAG apps, AI agents and n8n workflows, backed by hands-on IT
@@ -48,7 +50,7 @@ export default function HeroSection() {
               View My Work
               <ArrowUpRight className="h-4 w-4" />
             </a>
-            <a href="/Mohammed_Jasim_CV.pdf" download className="btn-glass">
+            <a href="/Mohamed_Jasim_CV.pdf" download className="btn-glass">
               Download CV
               <Download className="h-4 w-4" />
             </a>

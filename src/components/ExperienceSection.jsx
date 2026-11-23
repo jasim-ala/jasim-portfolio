@@ -2,63 +2,90 @@ import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight, Building2, Quote } from 'lucide-react';
 
 export default function ExperienceSection() {
+  // From the CV (November 2026); the two Forage simulations follow the jobs
   const experiences = [
     {
       period: 'April 2025 – Present',
-      role: 'Facility Management Helpdesk',
+      role: 'IT Support Engineer – Facility Management Helpdesk',
       company: 'Al Mariah Facility Management, SKMC Ajman',
       location: 'Ajman, UAE',
       highlights: [
-        'Provided technical support and customer assistance by resolving user issues via phone, email, and in-person, maintaining a 95% first-call resolution rate.',
-        'Managed help desk operations, including ticket logging, prioritization, and escalation, ensuring timely issue resolution within SLA standards.',
-        'Recorded and maintained daily reports on technical incidents, downtime, and resolutions to support data-driven performance tracking.',
-        'Generated and analyzed help desk performance reports, identifying trends to optimize support efficiency and response times.',
+        'Deliver first- and second-line technical support by phone, email and in person, maintaining a 95% first-call resolution rate.',
+        'Log, prioritise and escalate incidents and service requests through the helpdesk ticketing system in line with SLA requirements.',
+        'Record and analyse incident and downtime data to identify recurring faults and support root-cause resolution.',
+        'Produce performance reports tracking response times, resolution efficiency and service trends for management review.',
+        'Communicate technical updates and resolutions clearly to non-technical end users and stakeholders.',
       ],
       current: true,
       badge: 'Current role',
     },
     {
-      period: 'October 2025',
-      role: 'Deloitte – Cyber Job Simulation',
-      company: 'Deloitte (Forage)',
-      location: 'Virtual Simulation',
+      period: 'May 2024 – April 2025',
+      role: 'Senior IT Specialist & Web Developer',
+      company: 'La Rose Gallery Perfumes',
+      location: 'Umm Al Quwain, UAE',
+      groups: [
+        {
+          title: 'AI & Automation',
+          items: [
+            'Used AI tools (Claude, ChatGPT, Gemini) daily to research technical problems, write and debug scripts, and build automations end to end, reviewing and testing every AI-generated output before deployment.',
+            'Designed and deployed AI-powered and low-code automations (n8n) for website and business workflows, cutting repetitive manual tasks such as data entry, notifications, form handling and routine reporting.',
+            'Connected the website, email and business platforms through API and webhook integrations, and integrated LLM APIs (Gemini) into workflows for content drafting, data extraction and query handling.',
+            'Monitored scheduled automations, traced failures to the root cause and delivered permanent fixes; documented each workflow with its configuration, run steps and rollback.',
+            'Identified further opportunities to automate routine IT and business operations, and trained staff to use AI productivity tools for drafting, research and reporting.',
+          ],
+        },
+        {
+          title: 'IT Support, Systems & Web',
+          items: [
+            'Implemented and administered an IT ticketing system to log, prioritise, track and resolve employee support requests.',
+            'Provided technical support to staff, diagnosing and resolving hardware, software, network and system issues.',
+            'Handled system configuration, software installation, upgrades and maintenance, and managed user accounts, access permissions and IT equipment setup.',
+            'Monitored and maintained IT infrastructure, analysing recurring problems and implementing lasting fixes to minimise disruption to daily operations.',
+            "Managed, developed and maintained the company's websites, overseeing functionality, performance, security and reliability, and delivered front-end and back-end enhancements and third-party integrations.",
+          ],
+        },
+      ],
+      current: false,
+      badge: 'AI & IT',
+    },
+    {
+      period: 'February 2023 – April 2024',
+      role: 'IT Support',
+      company: 'Al Taqwa Electric Wire Trading',
+      location: 'Ajman, UAE',
       highlights: [
-        'Completed a virtual job simulation focused on cybersecurity analysis and incident response for a Deloitte client scenario.',
-        'Analysed web activity logs to identify patterns and detect potential security threats.',
-        'Supported a simulated client during a cybersecurity breach, assessing impact and recommending response actions.',
-        'Investigated suspicious user activity to determine possible data compromise or unauthorized access.',
+        'Provided first- and second-line IT support, diagnosing and resolving hardware, software, operating system and network connectivity issues.',
+        'Troubleshot LAN, Wi-Fi and internet connectivity problems and supported basic network infrastructure.',
+        'Installed, configured and maintained desktops, laptops, printers, peripherals and business software.',
+        'Managed user accounts and system access, applying basic IT security and access control practices.',
+        'Performed routine system maintenance and software updates, and maintained IT equipment to support day-to-day operations.',
+        'Resolved support requests promptly and documented issues, troubleshooting procedures and resolutions in a shared knowledge base.',
+      ],
+      current: false,
+      badge: 'IT support',
+    },
+    {
+      period: 'Forage simulation',
+      role: 'Deloitte – Cybersecurity & Incident Response',
+      company: 'Deloitte (Forage)',
+      location: 'Virtual',
+      highlights: [
+        'Web activity log analysis, breach impact assessment and suspicious activity investigation.',
       ],
       current: false,
       badge: 'Cybersecurity',
     },
     {
-      period: 'October 2025',
-      role: 'Tata Group – Data Analytics Job Simulation',
-      company: 'Tata Group / Tata iQ (Forage)',
-      location: 'Virtual Simulation',
+      period: 'Forage simulation',
+      role: 'Tata Group – AI-Powered Data Analytics',
+      company: 'Tata Group (Forage)',
+      location: 'Virtual',
       highlights: [
-        'Completed a virtual job simulation focused on AI-powered data analytics and strategic problem-solving for the Financial Services team at Tata iQ.',
-        'Conducted exploratory data analysis (EDA) using GenAI tools to assess data quality, identify risk indicators, and prepare insights for predictive modelling.',
-        'Developed and proposed a no-code predictive modelling framework to evaluate customer delinquency risk, enhancing decision-making accuracy and efficiency.',
-        'Designed an AI-driven collections strategy leveraging agentic AI and automation, ensuring compliance with ethical AI standards and regulatory frameworks.',
+        'Exploratory data analysis with GenAI tools, predictive modelling and ethical AI compliance.',
       ],
       current: false,
       badge: 'Data & AI',
-    },
-    {
-      period: 'March 2024',
-      role: 'IT Support Intern',
-      company: 'IT Infrastructure Team',
-      location: 'UAE',
-      highlights: [
-        'Assisted IT team in maintaining and troubleshooting internal systems and network infrastructure.',
-        'Provided technical support and troubleshooting for hardware, software, and internal systems, ensuring minimal downtime.',
-        'Assisted in network setup and configuration, improving connectivity and system performance.',
-        'Documented technical issues and resolutions to support knowledge sharing and faster future problem-solving.',
-        'Collaborated with team members to deliver efficient IT support services and enhance overall operational reliability.',
-      ],
-      current: false,
-      badge: 'IT support',
     },
   ];
 
@@ -109,13 +136,20 @@ export default function ExperienceSection() {
               <Quote className="h-5 w-5 shrink-0 fill-accent-ring text-accent-ring" />
             </div>
 
-            <ul className="mt-5 flex-1 space-y-2.5">
-              {exp.highlights.map((item) => (
-                <li key={item} className="text-[13px] leading-relaxed text-ink-soft">
-                  {item}
-                </li>
+            <div className="mt-5 flex-1 space-y-4">
+              {(exp.groups || [{ items: exp.highlights }]).map((group) => (
+                <div key={group.title || 'highlights'}>
+                  {group.title && <h4 className="mb-2 text-xs font-semibold text-accent-bright">{group.title}</h4>}
+                  <ul className="space-y-2.5">
+                    {group.items.map((item) => (
+                      <li key={item} className="text-[13px] leading-relaxed text-ink-soft">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
 
             <div className="mt-6 flex items-center gap-3 border-t border-white/80 pt-5">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white bg-white text-ink-soft shadow-card">

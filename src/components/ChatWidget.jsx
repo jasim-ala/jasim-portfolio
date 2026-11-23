@@ -11,25 +11,25 @@ const STARTER_PROMPTS = [
 // Facts the local assistant answers from (kept in line with the CV)
 const KNOWLEDGE = {
   education:
-    'Jasim holds a BSc in Computer Science (2021 – 2024) and an MSc in Cybersecurity, both from the University of West London.',
+    'Jasim holds an MSc in Cybersecurity from Paris American University (2025 – 2026) and a BSc in Computer Science from the University of West London (2021 – 2024).',
   stack:
-    'For AI work Jasim uses the Gemini and Claude APIs, RAG, function calling, structured output, LLM evals and n8n. He builds with TypeScript, React, Next.js and Node.js, and also works in Python, Java, PHP and MySQL.',
+    'Jasim uses Claude, Claude Code, ChatGPT and Gemini every day, and builds n8n, Zapier and Make workflows, API integrations, RAG apps, AI agents and chatbots. He scripts in Python, PowerShell, Google Apps Script, TypeScript, JavaScript, Node.js and SQL, and covers networking (TCP/IP, DNS, DHCP, LAN and Wi-Fi), macOS, Windows and Linux devices, Google Workspace, Microsoft 365 and IT security.',
   experience:
-    'Jasim is an IT Support Engineer on the Facility Management Helpdesk at Al Mariah Facility Management (SKMC, Ajman) since April 2025, with a 95% first-call resolution rate and SLA-based ticket handling. Before that he did IT support at Al Taqwa Electric Wire Trading (2023 – 2025).',
+    'Jasim is an IT Specialist with over three years of UAE experience. Since April 2025 he has been IT Support Engineer on the Facility Management Helpdesk at Al Mariah Facility Management (SKMC, Ajman), with a 95% first-call resolution rate. From May 2024 to April 2025 he was Senior IT Specialist & Web Developer at La Rose Gallery Perfumes, building n8n and AI automations, API integrations and the company websites. Before that he did IT support at Al Taqwa Electric Wire Trading (February 2023 – April 2024).',
   projects:
     'His live AI projects are Pipeline (a full-stack B2B CRM where Claude drafts outreach emails that are approved in the app or on Telegram), DocuChat (RAG chat with PDFs and page citations), TripAgent (a function-calling agent with code-enforced stop rules), BillScan (bill photos to verified tables) and EvalLab (an eval scorecard for those apps, 129 of 137 checks passing). He also built an n8n Telegram bot that drafts influencer pitches with human review. See the Projects section for live links.',
   languages: 'Jasim speaks English and Malayalam, and some Arabic.',
   contact:
-    'You can email Jasim at jasimala07@gmail.com or use the contact form at the bottom of this page. He is based in Ajman, UAE.',
+    'You can email Jasim at jasimala07@gmail.com, find him on LinkedIn (linkedin.com/in/mohamed-jasim-247493271), or use the contact form at the bottom of this page. He is based in Dubai, UAE.',
 };
 
 const RULES = [
   { keys: ['education', 'study', 'degree', 'university', 'college', 'msc', 'bsc'], answer: KNOWLEDGE.education },
   { keys: ['project', 'built', 'portfolio', 'pipeline', 'crm', 'docuchat', 'tripagent', 'billscan', 'evallab', 'rag', 'agent', 'n8n'], answer: KNOWLEDGE.projects },
   { keys: ['skill', 'stack', 'tech', 'develop', 'code', 'react', 'next', 'python', 'gemini', 'claude'], answer: KNOWLEDGE.stack },
-  { keys: ['experience', 'work', 'job', 'role', 'uae', 'helpdesk', 'support', 'current'], answer: KNOWLEDGE.experience },
+  { keys: ['experience', 'work', 'job', 'role', 'uae', 'helpdesk', 'support', 'current', 'la rose', 'specialist'], answer: KNOWLEDGE.experience },
   { keys: ['language', 'speak', 'english', 'arabic', 'malayalam'], answer: KNOWLEDGE.languages },
-  { keys: ['contact', 'hire', 'email', 'reach', 'phone'], answer: KNOWLEDGE.contact },
+  { keys: ['contact', 'hire', 'email', 'reach', 'phone', 'linkedin', 'location', 'based', 'dubai'], answer: KNOWLEDGE.contact },
 ];
 
 function getLocalAiResponse(userMessage) {

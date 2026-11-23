@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   siPython,
-  siOpenjdk,
+  siGoogleappsscript,
   siJavascript,
   siTypescript,
   siReact,
@@ -14,7 +14,8 @@ import {
   siGit,
   siLinux,
   siVercel,
-  siTelegram,
+  siZapier,
+  siMake,
   siDialogflow,
   siElevenlabs,
   siNotion,
@@ -30,7 +31,7 @@ const siChatgpt = {
 
 const TOOLS = [
   { icon: siPython, name: 'Python' },
-  { icon: siOpenjdk, name: 'Java' },
+  { icon: siGoogleappsscript, name: 'Apps Script' },
   { icon: siJavascript, name: 'JavaScript' },
   { icon: siTypescript, name: 'TypeScript' },
   { icon: siReact, name: 'React' },
@@ -44,28 +45,42 @@ const TOOLS = [
   { icon: siElevenlabs, name: 'ElevenLabs' },
   { icon: siNotion, name: 'Notion MCP' },
   { icon: siDialogflow, name: 'Dialogflow' },
-  { icon: siTelegram, name: 'Telegram' },
+  { icon: siZapier, name: 'Zapier' },
+  { icon: siMake, name: 'Make' },
   { icon: siGit, name: 'Git' },
   { icon: siLinux, name: 'Linux' },
   { icon: siVercel, name: 'Vercel' },
 ];
 
+// Grouped as in the CV (November 2026)
 const SKILL_CATEGORIES = [
   {
-    title: 'Programming & Web',
-    skills: ['Python', 'Java', 'PHP', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'HTML5', 'CSS3', 'SQL', 'MySQL'],
+    title: 'AI & Automation',
+    skills: ['Claude', 'Claude Code', 'ChatGPT', 'Gemini', 'n8n', 'Zapier', 'Make', 'API & Webhook Integrations', 'LLM Integration', 'RAG Apps', 'AI Agents', 'Chatbots (Dialogflow)', 'Prompt Engineering', 'Structured Output', 'LLM Evals', 'ElevenLabs', 'Notion MCP', 'Testing AI Outputs', 'Training Colleagues on AI'],
   },
   {
-    title: 'AI Tools & Automation',
-    skills: ['n8n', 'Claude API', 'Gemini API', 'Claude Code', 'ChatGPT', 'Cursor', 'RAG', 'Structured Output', 'Function Calling', 'LLM Evals', 'ElevenLabs', 'Notion MCP', 'Apache Airflow', 'Dialogflow', 'AI Agent Nodes', 'Prompt Engineering', 'Agentic AI Workflows', 'Telegram Bot API', 'Gmail API', 'Webhooks & API Integrations'],
+    title: 'Programs & Scripts',
+    skills: ['Python', 'PowerShell', 'Google Apps Script', 'TypeScript', 'JavaScript', 'Node.js', 'SQL', 'Git', 'Scheduled Tasks & Jobs', 'Packaging & Documentation', 'Test Before Deployment'],
   },
   {
-    title: 'Operating Systems & Tools',
-    skills: ['Windows', 'Linux', 'Git', 'Network Config', 'Hardware Troubleshooting'],
+    title: 'Networking',
+    skills: ['TCP/IP', 'DNS', 'DHCP', 'LAN & Wi-Fi', 'Mesh Wi-Fi', 'Router Configuration', 'Connectivity & Failover', 'Root-Cause Analysis from Logs', 'ISP & Vendor Escalation'],
   },
   {
-    title: 'Professional Competencies',
-    skills: ['IT Support', 'Troubleshooting', 'Incident Management', 'SLA Tracking', 'Teamwork', 'Problem-Solving'],
+    title: 'Devices & Systems',
+    skills: ['macOS', 'iOS / iPadOS', 'Windows 10/11', 'Linux', 'Device Provisioning', 'OS Installation', 'Software Deployment & Patching', 'Laptops, Printers & Peripherals'],
+  },
+  {
+    title: 'Security',
+    skills: ['Two-Factor Authentication', 'Password Management', 'Encryption', 'Access Control', 'Secure Device Wipe', 'Log Analysis', 'Threat Detection', 'Incident Response'],
+  },
+  {
+    title: 'IT Administration',
+    skills: ['Google Workspace', 'Microsoft 365', 'User & Access Management', 'Licence & Asset Registers', 'DNS & Domains', 'Change Control & Rollback', 'ServiceNow', 'JIRA', 'SLA Management'],
+  },
+  {
+    title: 'Data & Research',
+    skills: ['Excel', 'Data Collection via APIs', 'Data Cleaning', 'Structured Extraction (JSON Schema)', 'Datasets & Reports'],
   },
 ];
 
