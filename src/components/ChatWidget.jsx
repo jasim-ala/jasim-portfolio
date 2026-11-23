@@ -17,7 +17,7 @@ const KNOWLEDGE = {
   experience:
     'Jasim is an IT Specialist with over three years of UAE experience. Since April 2025 he has been IT Support Engineer on the Facility Management Helpdesk at Al Mariah Facility Management (SKMC, Ajman), with a 95% first-call resolution rate. From May 2024 to April 2025 he was Senior IT Specialist & Web Developer at La Rose Gallery Perfumes, building n8n and AI automations, API integrations and the company websites. Before that he did IT support at Al Taqwa Electric Wire Trading (February 2023 – April 2024).',
   projects:
-    'His live AI projects are Pipeline (a full-stack B2B CRM where Claude drafts outreach emails that are approved in the app or on Telegram), DocuChat (RAG chat with PDFs and page citations), TripAgent (a function-calling agent with code-enforced stop rules), BillScan (bill photos to verified tables) and EvalLab (an eval scorecard for those apps, 129 of 137 checks passing). He also built an n8n Telegram bot that drafts influencer pitches with human review. See the Projects section for live links.',
+    'His live AI projects are Pipeline (a full-stack B2B CRM where Claude drafts outreach emails that are approved in the app or on Telegram), DocuChat (RAG chat with PDFs and page citations), TripAgent (a function-calling agent with code-enforced stop rules), BillScan (bill photos to verified tables) and EvalLab (an eval scorecard for those apps, 129 of 137 checks passing). See the Projects section for live links.',
   languages: 'Jasim speaks English and Malayalam, and some Arabic.',
   contact:
     'You can email Jasim at jasimala07@gmail.com, find him on LinkedIn (linkedin.com/in/mohamed-jasim-247493271), or use the contact form at the bottom of this page. He is based in Dubai, UAE.',

@@ -1,7 +1,5 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { useState } from 'react';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
-// three.js loads only when a card without a screenshot is shown ("View All")
-const ThreeProjectCanvas = lazy(() => import('./projects/ThreeProjectCanvas'));
 import CaseStudyModal from './projects/CaseStudyModal';
 
 // Cards shown before "View All Projects" is pressed
@@ -51,7 +49,6 @@ export default function ProjectsSection() {
         'Next.js 16 app on Vercel. The browser parses PDFs with pdf.js, chunks pages (900 chars, 150 overlap) and runs BM25 retrieval locally. A streaming route handler sends the top chunks as numbered sources to the Gemini API and streams the answer back as NDJSON; the client renders validated inline citations with the quoted source text.',
       metric: 'PAGE-LEVEL CITATIONS',
       tags: ['RAG', 'Next.js', 'TypeScript', 'Gemini API', 'pdf.js', 'BM25', 'Vercel'],
-      threeType: 'rag-docuchat',
       image: '/images/work/docuchat.jpg',
     },
     {
@@ -72,7 +69,6 @@ export default function ProjectsSection() {
         'Next.js route handler runs the agent loop on Gemini function calling and streams NDJSON events (thought, tool call, result, plan, stop) to the browser. The full model history is returned to the client so a run can resume statelessly after a question, a limit or a refinement request.',
       metric: 'CODE-ENFORCED STOPS',
       tags: ['AI Agents', 'Function Calling', 'Gemini API', 'Next.js', 'TypeScript', 'Streaming'],
-      threeType: 'tripagent',
       image: '/images/work/tripagent.jpg',
     },
     {
@@ -93,7 +89,6 @@ export default function ProjectsSection() {
         'The browser downsizes the image to a JPEG and posts it to a Next.js route that calls Gemini with a JSON schema at temperature 0. The response is Zod-validated; a shared checker module recomputes the maths on the server output and again on every edit in the UI.',
       metric: 'MATH-VERIFIED OUTPUT',
       tags: ['Structured Output', 'Gemini API', 'Zod', 'Next.js', 'TypeScript', 'Vercel'],
-      threeType: 'billscan',
       image: '/images/work/billscan.jpg',
     },
     {
@@ -114,81 +109,7 @@ export default function ProjectsSection() {
         'A Node.js (TypeScript) runner executes offline suites against the production modules and live suites against the deployed APIs, writes a JSON report and history, and the Next.js scorecard renders it statically, so the site needs no API key.',
       metric: '94% · 129/137 CHECKS',
       tags: ['LLM Evals', 'Test Design', 'TypeScript', 'Node.js', 'Next.js'],
-      threeType: 'evallab',
       image: '/images/work/evallab.jpg',
-    },
-    {
-      id: 'n8n-outreach-bot',
-      kind: 'n8n workflow',
-      category: 'AI & AUTOMATION',
-      type: 'N8N AGENTIC WORKFLOW',
-      title: 'Influencer Pitch Bot on n8n',
-      link: 'https://github.com/jasim-ala/influnecer-pitch-bot',
-      linkLabel: 'View Workflow',
-      bullets: [
-        'Built a 36-node Telegram bot on n8n Cloud that manages an influencer roster and drafts paid collaboration pitches to cafes and restaurants.',
-        'Classifies every incoming message into add, edit, lookup or pitch, then routes it through Switch nodes so one chat handles the whole workflow.',
-        'Stores the roster and each chat\'s pending state in n8n Data Tables, so free-text replies work reliably without a blocking wait node.',
-        'An AI Agent node backed by the Claude API writes the pitch from the matched influencer\'s handle, reach and package pricing.',
-        'Every draft returns to Telegram for review: reply send to email it, new for a fresh version, or type a change and the agent revises it.',
-      ],
-      architecture:
-        'A Telegram trigger checks Data Table state for a pending draft or intake before classifying the message. Code and Switch nodes route add, edit, lookup and pitch paths; the pitch path matches the influencer, calls an AI Agent node on the Claude API, and holds the draft as pending until a Telegram confirmation releases the Gmail send and marks the row sent.',
-      metric: 'HUMAN-IN-THE-LOOP',
-      tags: ['n8n', 'Telegram Bot API', 'Claude API', 'Gmail API', 'Data Tables', 'AI Agent'],
-      threeType: 'n8n-outreach-bot',
-    },
-    {
-      id: 'ai-chatbot',
-      kind: 'AI chatbot',
-      category: 'AI & AUTOMATION',
-      type: 'AI / AGENTIC WORKFLOW',
-      title: 'AI Chatbot for Website',
-      bullets: [
-        'Created an AI-powered chatbot to automate customer support and increase user engagement.',
-        'Developed and integrated the chatbot using JavaScript, HTML, CSS, and Node.js.',
-        'Utilized Dialogflow and API integrations to enable intelligent query handling and real-time responses.',
-        'Improved customer engagement by 40% through 24/7 automated assistance with optimized response times.',
-      ],
-      architecture:
-        'Client Frontend connects via WebSockets & REST APIs to a Node.js webhook orchestrator, querying Google Dialogflow intent processors to return sub-500ms responses.',
-      metric: '+40% ENGAGEMENT',
-      tags: ['JavaScript', 'HTML/CSS', 'Node.js', 'Dialogflow API', 'REST Webhooks'],
-      threeType: 'ai-chatbot',
-    },
-    {
-      id: 'ecommerce-platform',
-      kind: 'Full-stack web app',
-      category: 'WEB APPS',
-      type: 'FULL-STACK PLATFORM',
-      title: 'E-Commerce Website',
-      bullets: [
-        'Developed a fully functional e-commerce platform supporting product browsing and online purchases.',
-        'Programmed the site using HTML, CSS, JavaScript, and PHP, ensuring full-stack functionality.',
-        'Implemented shopping cart and order processing features, improving transaction efficiency by 25%.',
-      ],
-      architecture:
-        'Modular PHP MVC backend with relational MySQL order schema, transactional cart session handling, and optimized DOM client rendering.',
-      metric: '+25% EFFICIENCY',
-      tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'Full-Stack'],
-      threeType: 'ecommerce-platform',
-    },
-    {
-      id: 'task-management',
-      kind: 'Web app',
-      category: 'WEB APPS',
-      type: 'RESPONSIVE WEB APP',
-      title: 'Web-Based Task Management System',
-      bullets: [
-        'Developed a web-based platform to simplify task creation, tracking, and management.',
-        'Designed and implemented a responsive front end using HTML, CSS, and JavaScript, improving user interaction efficiency by 30%.',
-        'Built secure user authentication and task management features, enhancing workflow reliability.',
-      ],
-      architecture:
-        'Event-driven JavaScript client architecture with real-time localStorage persistence, secure session state guards, and responsive layout primitives.',
-      metric: '+30% EFFICIENCY',
-      tags: ['HTML', 'CSS', 'JavaScript', 'Authentication', 'State Management'],
-      threeType: 'task-management',
     },
   ];
 
@@ -214,33 +135,27 @@ export default function ProjectsSection() {
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {visibleProjects.map((project) => (
           <article key={project.id} className="glass-card lift group flex flex-col p-2">
-            {/* Media: live screenshot, or the 3D model for projects without a public demo */}
+            {/* Media: live screenshot shown as a floating browser window */}
             <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-gradient-to-br from-[#f6f3ff] via-[#eceaff] to-[#e1e8ff]">
-              {project.image ? (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${project.title}`}
-                  className="absolute -bottom-6 -right-8 left-7 top-8 overflow-hidden rounded-[10px] border border-white/90 bg-ink shadow-float transition-transform duration-700 ease-out-expo group-hover:-translate-y-1.5"
-                >
-                  <span className="flex h-4 items-center gap-1 bg-white/90 px-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#ff6159]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#ffbd2e]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#28c941]" />
-                  </span>
-                  <img
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-left-top"
-                  />
-                </a>
-              ) : (
-                <Suspense fallback={null}>
-                  <ThreeProjectCanvas type={project.threeType} />
-                </Suspense>
-              )}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.title}`}
+                className="absolute -bottom-6 -right-8 left-7 top-8 overflow-hidden rounded-[10px] border border-white/90 bg-ink shadow-float transition-transform duration-700 ease-out-expo group-hover:-translate-y-1.5"
+              >
+                <span className="flex h-4 items-center gap-1 bg-white/90 px-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#ff6159]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#ffbd2e]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#28c941]" />
+                </span>
+                <img
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-left-top"
+                />
+              </a>
               {project.link && (
                 <a
                   href={project.link}
